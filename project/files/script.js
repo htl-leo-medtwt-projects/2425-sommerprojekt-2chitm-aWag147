@@ -46,7 +46,7 @@ function enlarge(element) {
         element.classList.add('enlarged'); 
     }
 }
-
+//Test
 
 //Tooltip, Hilfe von KI
 document.addEventListener("DOMContentLoaded", function () {
