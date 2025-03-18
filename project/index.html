@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="files/script.js" defer></script>
+    <script src="files/game.js" defer></script>
+    <script src="files/container.js" defer></script>
+    <script src="files/content.js" defer></script>
 </head>
 <body>
     <div id="tooltip"></div>
@@ -22,15 +24,30 @@
     
         <div id="progression"></div>
         
-        <div id="camera"></div>
-        <div id="team"></div>
-        <div id="smartphone"></div>
-        <div id="shop"></div>
-        <div id="settings"></div>
-          
-        
+        <div id="button-container">
+            <div id="camera" class="button"></div>
+            <div id="team" class="button"></div>
+            <div id="smartphone" class="button"></div>
+            <div id="shop" onclick="shop()" class="button"></div>
+            <div id="settings" class="button"></div>
+            <div id="youtube" class="button"></div>
+            <div id="livechat" class=" button"></div>
+        </div> 
     </div>
     
+    <div id="container3">
+        
+    <section>
+            <div id="simpleNav" class="simple-nav">
+                <button onclick="back()">Go back</button>
+                <button id="music-button" onclick="music()">Music</button>
+                <button id="click-button" onclick="cursors()">Cursors</button>
+                <button id="themes-button" onclick="themes()">Themes</button>
+                
+            </div>
+    </section>
+    
+    </div>
 
 </body>
 </html>

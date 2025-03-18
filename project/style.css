@@ -19,11 +19,12 @@ body, html {
     100%{ transform: scale(1); }
 }
 
+
+
 @keyframes start-p {
     0% { opacity: 0; }  
     100% { opacity: 1; } 
 }
-
 
 @keyframes fade-out-up {
     0% {
@@ -83,6 +84,10 @@ body, html {
     animation: start-p 1s ease-in-out 2s forwards; 
 }
 
+
+
+/* Container 2 */
+
 #container2{
     display: flex;
     justify-content: center;
@@ -93,15 +98,6 @@ body, html {
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
-    
-}
-
-#p1{
-    font-family: coolvetica;
-    color: rgb(0, 0, 0);
-    font-size: 50px;
-    opacity: 0.92;
-    text-shadow: 10px 20px 15px rgb(77, 77, 77);
 }
 
 #phone{
@@ -117,7 +113,6 @@ body, html {
     transform: scale(1.01);
 }
   
-
 #follower-counter, #money-counter {
     position: absolute;
     font-family: coolvetica;
@@ -137,101 +132,40 @@ body, html {
     right: 20px;
 }
 
-#camera{
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 3px solid #000;
-    background: url(media/img/camera.png) rgb(235, 231, 231) 50% / contain no-repeat;
-    position: absolute;
-    top: 46%;
-    left: 1%;
-    box-shadow: 2px 2px 5px black;
-    transition: all 0.5s;
-}
-
-#camera:hover{
-    transform: translateX(+3%);
-}
-
-#team{
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 3px solid #000;
-    background: url(media/img/team.png) rgb(235, 231, 231) 50% / cover no-repeat;
+#button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
     position: absolute;
     left: 1%;
-    top: 36%;
-    box-shadow: 2px 2px 5px black;
-    transition: all 0.5s;
+    top: 25%;
+
 }
 
-#team:hover{
-    transform: translateX(+3%);
-}
-
-#smartphone{
+.button {
     width: 55px;
     height: 55px;
-    flex-shrink: 0;
     border-radius: 10px;
     border: 3px solid #000;
-    background: url(media/img/smartphone.png) rgb(235, 231, 231) 50% / cover no-repeat;
+    background-color: rgb(235, 231, 231);
+    background-size: cover;
     background-position: center;
-    background-size: contain;
-    position: absolute;
-    left: 1%;
-    top: 26%;
     box-shadow: 2px 2px 5px black;
-    transition: all 0.5s;
+    transition: transform 0.3s;
 }
 
-#smartphone:hover{
+.button:hover {
     transform: translateX(+3%);
 }
 
-#shop{
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 3px solid #000;
-    background: url(media/img/shop.webp) rgb(235, 231, 231) 50% / cover no-repeat;
-    background-position: center;
-    background-size: contain;
-    position: absolute;
-    left: 1%;
-    bottom: 36%;
-    box-shadow: 2px 2px 5px black;
-    transition: all 0.5s;
-}
-
-#shop:hover{
-    transform: translateX(+3%);
-}
-
-#settings{
-    width: 55px;
-    height: 55px;
-    flex-shrink: 0;
-    border-radius: 10px;
-    border: 3px solid #000;
-    background: url(media/img/settings.png) rgb(235, 231, 231) 50% / cover no-repeat;
-    background-position: center;
-    background-size: contain;
-    position: absolute;
-    left: 1%;
-    bottom: 26%;
-    box-shadow: 2px 2px 5px black;
-    transition: all 0.5s;
-}
-
-#settings:hover{
-    transform: translateX(+3%);
-}
+#camera { background-image: url(media/img/camera.png); }
+#team { background-image: url(media/img/team.png); }
+#smartphone { background-image: url(media/img/smartphone.png); }
+#shop { background-image: url(media/img/shop.png); }
+#settings { background-image: url(media/img/settings.png); }
+#youtube{background-image: url(media/img/youtube.png);}
+#livechat{background-image: url(media/img/livechat.png);}
 
 #tooltip {
     position: absolute;
@@ -255,5 +189,126 @@ body, html {
     position: absolute;
     top: 4%;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Container 3 */
+
+#container3{
+    position: absolute;
+    bottom: -100%; 
+    transition: bottom 0.5s ease-in-out;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    background-image: url(media/img/clouds.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+
+p{
+    color: black;
+}
+
+/*KI für !important */
+.slide-up {
+    bottom: 0 !important; 
+}
+
+.slide-down {
+    bottom: -100% !important; 
+}
+
+.simple-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.simple-nav button {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    border: none;
+    padding: 15px 25px;
+    font-size: 16px;
+    font-family: coolvetica;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, background-color 0.3s;
+}
+
+.simple-nav button:hover {
+    transform: scale(1.05);
+    background-color: lightgray;
+}
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: 20px auto;
+}
+
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    text-align: center;
+    font-family: coolvetica;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    width: 85%;
+    height: 80%; 
+    min-height: 150px;
+}
+
+.grid-item img{
+    width: 30%;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+
+}
+
+/* Buy Button */
+
+.buy-button {
+    background-color: #5085e8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: opacity 0.2s ease-in-out;
+    width: 30%;
+}
+
+.grid-item {
+    position: relative;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
 }
 

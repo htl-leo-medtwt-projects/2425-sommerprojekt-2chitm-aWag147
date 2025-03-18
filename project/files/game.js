@@ -1,18 +1,3 @@
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-        let container1 = document.getElementById('container1');
-        let container2 = document.getElementById('container2');
-
-        container1.style.animation = 'fade-out-up 1s forwards';
-        setTimeout(() => {
-            container1.style.visibility = 'hidden';
-            container1.style.position = 'absolute';
-            container2.style.display = 'flex';
-            container2.style.animation = 'fade-in 1s forwards';
-        }, 1000);
-    }
-});
-
 // Klicker-Logik
 let money = 0.0;
 let followers = 0;
@@ -31,6 +16,7 @@ function clickPhone() {
     }
 
     updateUI();
+    
 }
 
 function updateUI() {
@@ -46,7 +32,7 @@ function enlarge(element) {
         element.classList.add('enlarged'); 
     }
 }
-//Test
+
 
 //Tooltip, Hilfe von KI
 document.addEventListener("DOMContentLoaded", function () {
@@ -58,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
+        {id : "youtube", text: "Make another account."},
+        {id: "livechat", text: "Watch your livechat."},
         { id: "follower-counter", text: "Your followers." },
         { id: "money-counter", text: "Your money." }
     ];
@@ -108,8 +96,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
 const items = [
     { id: "camera", text: "Invest in better equipment." },
     { id: "team", text: "Hire a camera-team." },
@@ -117,3 +103,4 @@ const items = [
     { id: "shop", text: "Buy fun things in the shop." },
     { id: "settings", text: "Change your settings." }
 ];
+
