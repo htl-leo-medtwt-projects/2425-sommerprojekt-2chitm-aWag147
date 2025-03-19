@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
     };
 
+    //Optimierung mit KI
     // Erstellt alle Kategorien dynamisch im Container
     Object.entries(categories).forEach(([category, items]) => createGrid(category, items));
 
