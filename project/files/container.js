@@ -20,17 +20,7 @@ document.addEventListener('keydown', function(event) {
 function shop() {
     container3.classList.add("slide-up");
     container3.classList.remove("slide-down");
-
-    document.getElementById("music-button").style.backgroundColor = "lightgray";
-    document.getElementById("click-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-    document.getElementById("themes-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-
-    document.getElementById("music").style.display = "block";
-    document.getElementById("click-effects").style.display = "none";
-    document.getElementById("themes").style.display = "none";
-
-    document.getElementById("shop-h1").style.display = "none";
-    document.getElementById("shop-p").style.display = "none";
+    switchCategory("music");
 }
 
 

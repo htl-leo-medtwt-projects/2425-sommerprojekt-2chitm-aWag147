@@ -260,55 +260,62 @@ p{
 
 .grid-item {
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+    padding: 15px;
+    position: relative;
     text-align: center;
     font-family: coolvetica;
     font-size: 18px;
     font-weight: bold;
-    border-radius: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.2s;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s ease-in-out;
     width: 85%;
     height: 80%; 
     min-height: 150px;
+   
+}
+
+.grid-item:hover{
+    transform: scale(1.04);
 }
 
 .grid-item img{
     width: 30%;
 }
 
-.grid-item:hover {
-    transform: scale(1.05);
-
-}
 
 /* Buy Button */
 
 .buy-button {
-    background-color: #5085e8;
+    background-color: #5488e9;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: opacity 0.2s ease-in-out;
-    width: 30%;
+    border-radius: 8px;
+    margin: 3%;
+    width: 50%;
+    transition: all 0.2s ease-in-out;
+    opacity: 90%;
 }
 
-.grid-item {
-    position: relative;
-    text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
+.buy-button:hover{
+    background-color: #3466c4;
+}
+
+/* .grid-item {
     border-radius: 8px;
     transition: transform 0.2s;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
 }
 
 .grid-item:hover {
     transform: scale(1.05);
-}
+} */
 

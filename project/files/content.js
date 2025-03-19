@@ -1,53 +1,35 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container3 = document.getElementById("container3");
-    
 
     function createGrid(category, items) {
         const section = document.createElement("section");
         section.classList.add("category-section");
-        section.id = category.toLowerCase().replace(" ", "-");
-        section.style.display = "none";
+        section.id = category.toLowerCase();
+        section.style.display = "none"; // Standardmäßig versteckt
 
         const gridContainer = document.createElement("div");
         gridContainer.classList.add("grid-container");
 
-        items.forEach(item => {
+        items.forEach(({ name, price }) => {
             const box = document.createElement("div");
             box.classList.add("grid-item");
 
             const img = document.createElement("img");
-            img.src = `media/img/shop/${item.name}.png`;
-            img.alt = item.name;
+            img.src = `media/img/shop/${name}.png`;
+            img.alt = name;
             img.classList.add("grid-image");
 
             const label = document.createElement("p");
-            label.textContent = item.name;
-            label.style.fontStyle = "italic"; 
-            label.style.fontWeight  = "light";
+            label.textContent = name;
+            label.classList.add("grid-label");
 
-            const price = document.createElement("p");
-            price.textContent = `$${item.price}`;
-            price.classList.add("price");
-
-            // Kauf-Button 
             const buyButton = document.createElement("button");
-            buyButton.textContent = "Kaufen";
+            buyButton.textContent = `Buy for \n $${price}$`;
             buyButton.classList.add("buy-button");
-            buyButton.style.display = "none"; 
+            buyButton.style.textAlign = "center";
+            buyButton.style.whiteSpace = "pre-line";
 
-            // Hover-Effekt
-            box.addEventListener("mouseenter", () => {
-                buyButton.style.display = "block";
-            });
-
-            box.addEventListener("mouseleave", () => {
-                buyButton.style.display = "none";
-            });
-
-            box.appendChild(img);
-            box.appendChild(label);
-            box.appendChild(price);
-            box.appendChild(buyButton); 
+            box.append(img, label, buyButton);
             gridContainer.appendChild(box);
         });
 
@@ -55,64 +37,51 @@ document.addEventListener("DOMContentLoaded", function () {
         container3.appendChild(section);
     }
 
-    createGrid("Music", [
-        { name: "hip-hop", price: 20 },
-        { name: "lofi", price: 15 },
-        { name: "rock", price: 25 },
-        { name: "pop", price: 18 },
-        { name: "jazz", price: 22 },
-        { name: "classic", price: 30 }
-    ]);
+    const categories = {
+        Music: [
+            { name: "hip-hop", price: 20 },
+            { name: "lofi", price: 15 },
+            { name: "rock", price: 25 },
+            { name: "pop", price: 18 },
+            { name: "jazz", price: 22 },
+            { name: "classic", price: 30 }
+        ],
+        Cursor: [ 
+            { name: "blue", price: 5 },
+            { name: "wave", price: 6 },
+            { name: "ice", price: 8 },
+            { name: "rocket", price: 5 },
+            { name: "star", price: 7 },
+            { name: "diamond", price: 9 }
+        ],
+        Themes: [
+            { name: "sun", price: 10 },
+            { name: "night", price: 10 },
+            { name: "fog", price: 12 },
+            { name: "rain", price: 12 },
+            { name: "snow", price: 14 },
+            { name: "gold", price: 15 }
+        ]
+    };
 
-    createGrid("Click-Effects", [
-        { name: "blue", price: 5 },
-        { name: "wave", price: 6 },
-        { name: "ice", price: 8 },
-        { name: "rocket", price: 5 },
-        { name: "star", price: 7 },
-        { name: "diamond", price: 9 }
-    ]);
+    // Erstellt alle Kategorien dynamisch im Container
+    Object.entries(categories).forEach(([category, items]) => createGrid(category, items));
 
-    createGrid("Themes", [
-        { name: "sun", price: 10 },
-        { name: "night", price: 10 },
-        { name: "fog", price: 12 },
-        { name: "rain", price: 12 },
-        { name: "snow", price: 14 },
-        { name: "gold", price: 15 }
-    ]);
+    function switchCategory(activeId) {
+        document.querySelectorAll(".category-section").forEach(section => {
+            section.style.display = section.id === activeId ? "block" : "none";
+        });
 
-    // Kategorie-Wechsel Buttons
-    document.querySelector("button[onclick='music()']").addEventListener("click", function() {
-        document.getElementById("music-button").style.backg = "lightgray";
-        document.getElementById("click-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("themes-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("music").style.display = "block";
-        document.getElementById("click-effects").style.display = "none";
-        document.getElementById("themes").style.display = "none";
-        document.getElementById("shop-h1").style.display = "none";
-        document.getElementById("shop-p").style.display = "none";
-    });
+        // Button-Hintergrundfarben aktualisieren
+        document.getElementById("music-button").style.backgroundColor = activeId === "music" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
+        document.getElementById("cursor-button").style.backgroundColor = activeId === "cursor" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
+        document.getElementById("themes-button").style.backgroundColor = activeId === "themes" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
+    }
 
-    document.querySelector("button[onclick='cursors()']").addEventListener("click", function() {
-        document.getElementById("click-button").style.backgroundColor = "lightgray";
-        document.getElementById("music-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("themes-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("music").style.display = "none";
-        document.getElementById("click-effects").style.display = "block";
-        document.getElementById("themes").style.display = "none";
-        document.getElementById("shop-h1").style.display = "none";
-        document.getElementById("shop-p").style.display = "none";
-    });
+    // Event-Listener für die Buttons, um die Kategorien zu wechseln
+    document.getElementById("music-button").addEventListener("click", () => switchCategory("music"));
+    document.getElementById("cursor-button").addEventListener("click", () => switchCategory("cursor"));
+    document.getElementById("themes-button").addEventListener("click", () => switchCategory("themes"));
 
-    document.querySelector("button[onclick='themes()']").addEventListener("click", function() {
-        document.getElementById("themes-button").style.backgroundColor = "lightgray";
-        document.getElementById("click-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("music-button").style.backgroundColor = "rgba(255, 255, 255, 0.8)";
-        document.getElementById("music").style.display = "none";
-        document.getElementById("click-effects").style.display = "none";
-        document.getElementById("themes").style.display = "block";
-        document.getElementById("shop-h1").style.display = "none";
-        document.getElementById("shop-p").style.display = "none";
-    });
+    switchCategory("music");
 });
