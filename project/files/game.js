@@ -15,8 +15,35 @@ function clickPhone() {
         followers += 1;
     }
 
+    // Fortschrittsleiste aktualisieren alle 10 Klicks
+    if (clickCount % 10 === 0) {
+        moveBar();
+    }
+
     updateUI();
-    
+}
+
+let currentLevel = 1; // Startlevel
+
+//Mit W3 Shool
+function moveBar() {
+    var elem = document.getElementById("myBar");   
+    var levelText = document.getElementById("levelText");   
+    let currentWidth = parseFloat(elem.style.width) || 0;
+
+    if (currentWidth < 100) {
+        elem.style.width = (currentWidth + 10) + '%';
+        levelText.textContent = currentLevel; // Zeigt aktuelles Level
+    } else {
+        console.log("Balken ist voll! Neues Level erreicht.");
+        
+        // Fortschrittsbalken resetten
+        elem.style.width = '0%';  
+        
+        // Level erhöhen
+        currentLevel++;
+        levelText.textContent = currentLevel;
+    }
 }
 
 function updateUI() {
@@ -24,7 +51,7 @@ function updateUI() {
     document.getElementById("followers").textContent = followers;
 }
 
-//Klick Effekt, Mit Hilfe
+// Klick Effekt, Mit Hilfe
 function enlarge(element) {
     if (element.classList.contains('enlarged')) {
         element.classList.remove('enlarged'); 
@@ -33,8 +60,7 @@ function enlarge(element) {
     }
 }
 
-
-//Tooltip, Hilfe von KI
+// Tooltip, Hilfe von KI
 document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
 
@@ -44,8 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
-        {id : "youtube", text: "Make another account."},
-        {id: "livechat", text: "Watch your livechat."},
+        { id: "youtube", text: "Make another account." },
+        { id: "livechat", text: "Watch your livechat." },
         { id: "follower-counter", text: "Your followers." },
         { id: "money-counter", text: "Your money." }
     ];
@@ -94,13 +120,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-const items = [
-    { id: "camera", text: "Invest in better equipment." },
-    { id: "team", text: "Hire a camera-team." },
-    { id: "smartphone", text: "Upgrade your phone." },
-    { id: "shop", text: "Buy fun things in the shop." },
-    { id: "settings", text: "Change your settings." }
-];
-

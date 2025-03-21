@@ -1,6 +1,7 @@
 const container1 = document.getElementById('container1');
 const container2 = document.getElementById('container2');
 const container3 = document.getElementById('container3');
+const container4 = document.getElementById('container4');
 
 
 
@@ -28,3 +29,17 @@ function back() {
     container3.classList.add("slide-down");
     container3.classList.remove("slide-up");
 }
+
+function settings() {
+    container4.classList.add("slide-up");
+    container4.classList.remove("slide-down");
+    console.log(container4.classList);
+    addLabelToContainer();
+}
+
+function settingsBack(){
+    container4.classList.add("slide-down");
+    container4.classList.remove("slide-up");
+}
+
+
