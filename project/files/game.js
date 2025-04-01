@@ -89,28 +89,64 @@ function enlarge(element) {
 //Upgrades
 let teamUpgradeActive = false;
 let teamUpgradeInterval;
+let upgradeCost = 100;
+let incomePerSecond = 2;
 
-function teamUpgrade(){
-    if(money > 100 && !teamUpgradeActive){
-        money -= 100;
-        teamUpgradeActive = true;
+function teamUpgrade() {
+    if (money >= upgradeCost) {  
+        money -= upgradeCost;
+        
+        // Falls noch kein Interval läuft, starte es
+        if (!teamUpgradeActive) {
+            teamUpgradeActive = true;
 
-        teamUpgradeInterval = setInterval(() => {
-            money += 1;
-            followers += 1;
-            updateUI();
-        }, 1000)
+            teamUpgradeInterval = setInterval(() => {
+                money += incomePerSecond;
+                followers += incomePerSecond / 2;
+                updateUI();
+            }, 1000);
+        }
+
+        // Upgrade-Kosten und Einkommen verdoppeln
+        upgradeCost *= 2;
+        incomePerSecond *= 2;
+
+        // UI aktualisieren
+        updateUI();
+        updateUpgradeText();  // Tooltip aktualisieren
     }
-
 }
 
-// Tooltip, Hilfe von KI
+function teamUpgrade() {
+    if (money >= upgradeCost) {
+        money -= upgradeCost;
+
+        if (!teamUpgradeActive) {
+            teamUpgradeActive = true;
+            teamUpgradeInterval = setInterval(() => {
+                money += incomePerSecond;
+                followers += incomePerSecond;
+                updateUI();
+                moveBar();
+                updateUI();
+            }, 1000);
+        }
+
+        upgradeCost *= 2;
+        incomePerSecond *= 2;
+
+        updateUI();
+    }
+}
+
+//Mit Hilfe, um den text ständig upzudaten.
+
 document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
 
-    const items = [
+    const elements = [
         { id: "camera", text: "Invest in better equipment." },
-        { id: "team", text: "Hire a camera-team for 10000$." },
+        { id: "team", text: null }, // Der Text für "team" wird separat behandelt
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
@@ -120,14 +156,20 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: "money-counter", text: "Your money." }
     ];
 
-    items.forEach(item => {
+    elements.forEach(item => {
         const element = document.getElementById(item.id);
+        if (!element) return;
 
-        element.addEventListener("mouseover", (event) => {
-            tooltip.textContent = item.text;
+        // Event listener für "mouseenter" zum Anzeigen des Tooltips
+        element.addEventListener("mouseenter", (event) => {
+            let newText = item.id === "team" ? `Hire a camera-team for ${upgradeCost}$.` : item.text;
+            if (tooltip.textContent !== newText) {
+                tooltip.textContent = newText;
+            }
+
             tooltip.style.display = "block";
-
-            // Maus-Position
+            
+            // Initiale Position basierend auf der Maus
             let mouseX = event.pageX;
             let mouseY = event.pageY;
             let tooltipWidth = tooltip.offsetWidth;
@@ -143,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip.style.top = `${mouseY}px`;
         });
 
+        // Event listener für "mousemove" für dynamische Tooltip-Position
         element.addEventListener("mousemove", (event) => {
             let mouseX = event.pageX;
             let mouseY = event.pageY;
@@ -153,14 +196,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (mouseX + tooltipWidth + 20 > screenWidth) {
                 tooltip.style.left = `${mouseX - tooltipWidth - 15}px`;
             } else {
-                tooltip.style.left = `${mouseX + 15}px`;
+                tooltip.style.left = `${mouseX + 15}px`; 
             }
 
             tooltip.style.top = `${mouseY}px`;
         });
 
+        // Event listener für "mouseleave" zum Ausblenden des Tooltips
         element.addEventListener("mouseleave", () => {
             tooltip.style.display = "none";
         });
     });
 });
+
+
