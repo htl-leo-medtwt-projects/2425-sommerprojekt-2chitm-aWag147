@@ -72,7 +72,7 @@ function moveBar() {
 
 
 function updateUI() {
-    if(money > 1000){
+    if(money > 1000 && money < 1000000){
         document.getElementById("money").textContent = (money / 1000).toFixed(2) + ' K';
     }else{
         if(money > 1000000){
@@ -83,7 +83,7 @@ function updateUI() {
         }
     }
     
-    if(followers > 1000){
+    if(followers > 1000 && followers < 1000000){
         document.getElementById("followers").textContent = (followers / 1000).toFixed(2) + ' K';
     }else{
         if(followers > 1000000){
