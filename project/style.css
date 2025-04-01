@@ -201,17 +201,14 @@ body, html {
     transition: width 0.3s ease-in-out;
     text-align: left;
     padding-left: 10px;
+    
 }
 
 #levelText{
     color: white;
     font-family: coolvetica;
-    
+    z-index: 1;
 }
-
-
-
-
 
 /* Container 3 */
 

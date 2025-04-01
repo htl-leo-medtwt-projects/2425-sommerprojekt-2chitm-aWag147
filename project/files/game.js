@@ -2,6 +2,15 @@
 let money = 0.0;
 let followers = 0;
 let clickCount = 0;
+let currentLevel = 1;
+let clicksForNextLevel = 100; 
+const multiplier = 1.4; 
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("levelText").textContent = `Level ${currentLevel}`;
+});
+
+//Klicker Logik
 
 function clickPhone() {
     // Vergrößern oder verkleinern des Bildes
@@ -15,36 +24,35 @@ function clickPhone() {
         followers += 1;
     }
 
-    // Fortschrittsleiste aktualisieren alle 10 Klicks
-    if (clickCount % 10 === 0) {
-        moveBar();
-    }
-
+    // Fortschrittsleiste aktualisieren
+    moveBar();
     updateUI();
 }
 
-let currentLevel = 1; // Startlevel
-
-//Mit W3 Shool
 function moveBar() {
     var elem = document.getElementById("myBar");   
     var levelText = document.getElementById("levelText");   
     let currentWidth = parseFloat(elem.style.width) || 0;
-
-    if (currentWidth < 100) {
-        elem.style.width = (currentWidth + 10) + '%';
-        levelText.textContent = currentLevel; // Zeigt aktuelles Level
-    } else {
+    
+    let progressPerClick = 100 / clicksForNextLevel; // Dynamische Fortschrittssteigerung
+    elem.style.width = Math.min(currentWidth + progressPerClick, 100) + '%';
+    
+    // Level korrekt anzeigen
+    levelText.textContent = `Level ${currentLevel}`;
+    
+    if (currentWidth + progressPerClick >= 100) {
         console.log("Balken ist voll! Neues Level erreicht.");
         
         // Fortschrittsbalken resetten
         elem.style.width = '0%';  
         
-        // Level erhöhen
+        // Level erhöhen und Anforderung anpassen
         currentLevel++;
-        levelText.textContent = currentLevel;
+        clicksForNextLevel = Math.ceil(clicksForNextLevel * multiplier);
+        levelText.textContent = `Level ${currentLevel}`;
     }
 }
+
 
 function updateUI() {
     document.getElementById("money").textContent = money.toFixed(1);
