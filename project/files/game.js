@@ -5,6 +5,10 @@ let clickCount = 0;
 let currentLevel = 1;
 let clicksForNextLevel = 100; 
 const multiplier = 1.4; 
+const clickMoneyElement = document.getElementById("money-counter");
+const clickFollowerElement = document.getElementById("follower-counter");
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("levelText").textContent = `Level ${currentLevel}`;
@@ -17,13 +21,26 @@ function clickPhone() {
     enlarge(document.getElementById('phone'));
     
     // Geld und Follower erhöhen
-    money += 0.25;
+    money ++;
     clickCount++;
 
-    if (clickCount % 4 === 0) {
+    if (clickCount % 5 === 0) {
         followers += 1;
     }
 
+    clickMoneyElement.classList.add("animate");
+
+    setTimeout(() => {
+        clickMoneyElement.classList.remove("animate");
+    }, 100); 
+
+    clickFollowerElement.classList.add("animate");
+
+    setTimeout(() => {
+        clickFollowerElement.classList.remove("animate");
+    }, 100); 
+
+    
     // Fortschrittsleiste aktualisieren
     moveBar();
     updateUI();
@@ -55,7 +72,7 @@ function moveBar() {
 
 
 function updateUI() {
-    document.getElementById("money").textContent = money.toFixed(1);
+    document.getElementById("money").textContent = money;
     document.getElementById("followers").textContent = followers;
 }
 
