@@ -72,8 +72,29 @@ function moveBar() {
 
 
 function updateUI() {
-    document.getElementById("money").textContent = money;
-    document.getElementById("followers").textContent = followers;
+    if(money > 1000){
+        document.getElementById("money").textContent = (money / 1000).toFixed(2) + ' K';
+    }else{
+        if(money > 1000000){
+            document.getElementById("money").textContent = (money / 1000000).toFixed(2) + ' Mio';
+        }else{
+            document.getElementById("money").textContent = money;
+            
+        }
+    }
+    
+    if(followers > 1000){
+        document.getElementById("followers").textContent = (followers / 1000).toFixed(2) + ' K';
+    }else{
+        if(followers > 1000000){
+            document.getElementById("followers").textContent = (followers / 1000000).toFixed(2) + ' Mio';
+        }else{
+            document.getElementById("followers").textContent = followers;
+            
+        }
+    }
+    
+    
 }
 
 // Klick Effekt, Mit Hilfe
