@@ -85,13 +85,32 @@ function enlarge(element) {
     }
 }
 
+
+//Upgrades
+let teamUpgradeActive = false;
+let teamUpgradeInterval;
+
+function teamUpgrade(){
+    if(money > 100 && !teamUpgradeActive){
+        money -= 100;
+        teamUpgradeActive = true;
+
+        teamUpgradeInterval = setInterval(() => {
+            money += 1;
+            followers += 1;
+            updateUI();
+        }, 1000)
+    }
+
+}
+
 // Tooltip, Hilfe von KI
 document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
 
     const items = [
         { id: "camera", text: "Invest in better equipment." },
-        { id: "team", text: "Hire a camera-team." },
+        { id: "team", text: "Hire a camera-team for 10000$." },
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
