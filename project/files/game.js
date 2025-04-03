@@ -4,6 +4,7 @@ let followers = 0;
 let clickCount = 0;
 let currentLevel = 1;
 let clicksForNextLevel = 100; 
+let clicks = 1;
 const multiplier = 1.4; 
 const clickMoneyElement = document.getElementById("money-counter");
 const clickFollowerElement = document.getElementById("follower-counter");
@@ -23,7 +24,7 @@ function saveGameState() {
     localStorage.setItem('clickCount', clickCount);
     localStorage.setItem('currentLevel', currentLevel);
     localStorage.setItem('clicksForNextLevel', clicksForNextLevel);
-    localStorage.setItem('upgradeCost', upgradeCost);
+    localStorage.setItem('upgradeCost', upgradeCostTeam);
     localStorage.setItem('incomePerSecond', incomePerSecond);
     localStorage.setItem('teamUpgradeActive', teamUpgradeActive);
 }
@@ -45,10 +46,10 @@ function loadGameState() {
     if (!isNaN(savedClickCount)) clickCount = savedClickCount;
     if (!isNaN(savedCurrentLevel)) currentLevel = savedCurrentLevel;
     if (!isNaN(savedClicksForNextLevel)) clicksForNextLevel = savedClicksForNextLevel;
-    if (!isNaN(savedUpgradeCost)) upgradeCost = savedUpgradeCost;
+    if (!isNaN(savedUpgradeCost)) upgradeCostTeam = savedUpgradeCost;
     if (!isNaN(savedIncomePerSecond)) incomePerSecond = savedIncomePerSecond;
     teamUpgradeActive = savedTeamUpgradeActive === "true";
-    loadUpgrade();
+    loadUpgradeTeam();
 }
 
 //Klicker Logik
@@ -57,11 +58,11 @@ function clickPhone() {
     enlarge(document.getElementById('phone'));
     
     // Geld und Follower erhöhen
-    money ++;
+    money += clicks;
     clickCount++;
 
     if (clickCount % 5 === 0) {
-        followers += 1;
+        followers += clicks;
     }
 
     clickMoneyElement.classList.add("animate");
@@ -151,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
 
     const elements = [
-        { id: "camera", text: "Invest in better equipment." },
+        { id: "camera", text: null },
         { id: "team", text: null }, // Der Text für "team" wird separat behandelt
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
@@ -168,25 +169,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Event listener für "mouseenter" zum Anzeigen des Tooltips
         element.addEventListener("mouseenter", (event) => {
-            let newText = item.id === "team" ? `Hire a camera-team for ${upgradeCost}$.` : item.text;
-            if (tooltip.textContent !== newText) {
+            let newText = item.id === "team" ? `Hire a camera-team for ${upgradeCostTeam}$.` : 
+                           item.id === "camera" ? `Invest in equipment for ${upgradeCostCamera}$.` : 
+                           item.id === "smartphone" ? `Upgrade your phone for ${upgradeCostCamera}$.` :
+                           item.text;
+
+            if (newText) {
                 tooltip.textContent = newText;
+                tooltip.style.display = "block";
             }
 
-            tooltip.style.display = "block";
-            
-            // Initiale Position basierend auf der Maus
+            // Tooltip-Position berechnen
             let mouseX = event.pageX;
             let mouseY = event.pageY;
             let tooltipWidth = tooltip.offsetWidth;
             let screenWidth = window.innerWidth;
 
             // Prüfen, ob genug Platz nach rechts ist
-            if (mouseX + tooltipWidth + 20 > screenWidth) {
-                tooltip.style.left = `${mouseX - tooltipWidth - 15}px`; 
-            } else {
-                tooltip.style.left = `${mouseX + 15}px`; 
-            }
+            tooltip.style.left = (mouseX + tooltipWidth + 20 > screenWidth) ? 
+                `${mouseX - tooltipWidth - 15}px` : `${mouseX + 15}px`;
 
             tooltip.style.top = `${mouseY}px`;
         });
@@ -198,12 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
             let tooltipWidth = tooltip.offsetWidth;
             let screenWidth = window.innerWidth;
 
-            // Dynamisch die Position anpassen
-            if (mouseX + tooltipWidth + 20 > screenWidth) {
-                tooltip.style.left = `${mouseX - tooltipWidth - 15}px`;
-            } else {
-                tooltip.style.left = `${mouseX + 15}px`; 
-            }
+            tooltip.style.left = (mouseX + tooltipWidth + 20 > screenWidth) ? 
+                `${mouseX - tooltipWidth - 15}px` : `${mouseX + 15}px`;
 
             tooltip.style.top = `${mouseY}px`;
         });
@@ -214,5 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 
 

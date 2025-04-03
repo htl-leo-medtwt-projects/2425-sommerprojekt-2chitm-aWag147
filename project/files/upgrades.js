@@ -1,12 +1,19 @@
 //Upgrades
+
+//Team
 let teamUpgradeActive = false;
 let teamUpgradeInterval;
-let upgradeCost = 100;
+let upgradeCostTeam = 100;
 let incomePerSecond = 2;
 
+//Camera
+let upgradeCostCamera = 100;
+let cameraUpgradeActive = false;
+
+
 function teamUpgrade() {
-    if (money >= upgradeCost) {  
-        money -= upgradeCost;
+    if (money >= upgradeCostTeam) {  
+        money -= upgradeCostTeam;
         
         // Falls noch kein Interval läuft, starte es
         if (!teamUpgradeActive) {
@@ -20,7 +27,7 @@ function teamUpgrade() {
         }
 
         // Upgrade-Kosten und Einkommen verdoppeln
-        upgradeCost *= 2;
+        upgradeCostTeam *= 2;
         incomePerSecond *= 2;
 
         // UI aktualisieren
@@ -32,7 +39,7 @@ function teamUpgrade() {
 }
 
 //Das Upgrade wird auch aus dem Localstorage geladen
-function loadUpgrade() {
+function loadUpgradeTeam() {
     if (teamUpgradeActive) {
         if (!teamUpgradeInterval) { 
             teamUpgradeInterval = setInterval(() => {
@@ -45,4 +52,29 @@ function loadUpgrade() {
     }
 
     updateUI();
+}
+
+function cameraUpgrade(){
+    if (money >= upgradeCostCamera) {  
+        money -= upgradeCostCamera;
+        
+        // Falls noch kein Interval läuft, starte es
+        if (!cameraUpgradeActive) {
+            cameraUpgradeActive = true;
+
+            clicks *= 2;
+            updateUI();
+        }
+
+        // Upgrade-Kosten und Einkommen verdoppeln
+        clicks *= 2;
+        upgradeCostCamera *= 3;
+        
+
+        // UI aktualisieren
+        updateUI();
+        
+        //Speichern
+        saveGameState();
+    }
 }
