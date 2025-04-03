@@ -24,6 +24,8 @@ function saveGameState() {
     localStorage.setItem('currentLevel', currentLevel);
     localStorage.setItem('clicksForNextLevel', clicksForNextLevel);
     localStorage.setItem('upgradeCost', upgradeCost);
+    localStorage.setItem('incomePerSecond', incomePerSecond);
+    localStorage.setItem('teamUpgradeActive', teamUpgradeActive);
 }
 
 // Laden des Spielstands
@@ -34,6 +36,9 @@ function loadGameState() {
     const savedCurrentLevel = parseInt(localStorage.getItem('currentLevel'));
     const savedClicksForNextLevel = parseInt(localStorage.getItem('clicksForNextLevel'));
     const savedUpgradeCost = parseInt(localStorage.getItem('upgradeCost'));
+    const savedIncomePerSecond = parseInt(localStorage.getItem('incomePerSecond'));
+    const savedTeamUpgradeActive = localStorage.getItem('teamUpgradeActive');
+    
 
     if (!isNaN(savedMoney)) money = savedMoney;
     if (!isNaN(savedFollowers)) followers = savedFollowers;
@@ -41,6 +46,9 @@ function loadGameState() {
     if (!isNaN(savedCurrentLevel)) currentLevel = savedCurrentLevel;
     if (!isNaN(savedClicksForNextLevel)) clicksForNextLevel = savedClicksForNextLevel;
     if (!isNaN(savedUpgradeCost)) upgradeCost = savedUpgradeCost;
+    if (!isNaN(savedIncomePerSecond)) incomePerSecond = savedIncomePerSecond;
+    teamUpgradeActive = savedTeamUpgradeActive === "true";
+    loadUpgrade();
 }
 
 //Klicker Logik
@@ -136,42 +144,6 @@ function enlarge(element) {
         element.classList.add('enlarged'); 
     }
 }
-
-
-//Upgrades
-let teamUpgradeActive = false;
-let teamUpgradeInterval;
-let upgradeCost = 100;
-let incomePerSecond = 2;
-
-function teamUpgrade() {
-    if (money >= upgradeCost) {  
-        money -= upgradeCost;
-        
-        // Falls noch kein Interval läuft, starte es
-        if (!teamUpgradeActive) {
-            teamUpgradeActive = true;
-
-            teamUpgradeInterval = setInterval(() => {
-                money += incomePerSecond;
-                followers += incomePerSecond / 2;
-                updateUI();
-            }, 1000);
-        }
-
-        // Upgrade-Kosten und Einkommen verdoppeln
-        upgradeCost *= 2;
-        incomePerSecond *= 2;
-
-        // UI aktualisieren
-        updateUI();
-        
-        //Speichern
-        saveGameState();
-    }
-}
-
-
 
 //Mit Hilfe, um den text ständig upzudaten.
 
