@@ -11,11 +11,39 @@ const clickFollowerElement = document.getElementById("follower-counter");
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    loadGameState(); //Laden des Spielstands
     document.getElementById("levelText").textContent = `Level ${currentLevel}`;
+    updateUI();
 });
 
-//Klicker Logik
+//Speichern des Spielstandes
+function saveGameState() {
+    localStorage.setItem('money', money);
+    localStorage.setItem('followers', followers);
+    localStorage.setItem('clickCount', clickCount);
+    localStorage.setItem('currentLevel', currentLevel);
+    localStorage.setItem('clicksForNextLevel', clicksForNextLevel);
+    localStorage.setItem('upgradeCost', upgradeCost);
+}
 
+// Laden des Spielstands
+function loadGameState() {
+    const savedMoney = parseFloat(localStorage.getItem('money'));
+    const savedFollowers = parseInt(localStorage.getItem('followers'));
+    const savedClickCount = parseInt(localStorage.getItem('clickCount'));
+    const savedCurrentLevel = parseInt(localStorage.getItem('currentLevel'));
+    const savedClicksForNextLevel = parseInt(localStorage.getItem('clicksForNextLevel'));
+    const savedUpgradeCost = parseInt(localStorage.getItem('upgradeCost'));
+
+    if (!isNaN(savedMoney)) money = savedMoney;
+    if (!isNaN(savedFollowers)) followers = savedFollowers;
+    if (!isNaN(savedClickCount)) clickCount = savedClickCount;
+    if (!isNaN(savedCurrentLevel)) currentLevel = savedCurrentLevel;
+    if (!isNaN(savedClicksForNextLevel)) clicksForNextLevel = savedClicksForNextLevel;
+    if (!isNaN(savedUpgradeCost)) upgradeCost = savedUpgradeCost;
+}
+
+//Klicker Logik
 function clickPhone() {
     // Vergrößern oder verkleinern des Bildes
     enlarge(document.getElementById('phone'));
@@ -44,6 +72,9 @@ function clickPhone() {
     // Fortschrittsleiste aktualisieren
     moveBar();
     updateUI();
+
+    //Speichern
+    saveGameState();
 }
 
 function moveBar() {
@@ -134,31 +165,13 @@ function teamUpgrade() {
 
         // UI aktualisieren
         updateUI();
-        updateUpgradeText();  // Tooltip aktualisieren
+        
+        //Speichern
+        saveGameState();
     }
 }
 
-function teamUpgrade() {
-    if (money >= upgradeCost) {
-        money -= upgradeCost;
 
-        if (!teamUpgradeActive) {
-            teamUpgradeActive = true;
-            teamUpgradeInterval = setInterval(() => {
-                money += incomePerSecond;
-                followers += incomePerSecond;
-                updateUI();
-                moveBar();
-                updateUI();
-            }, 1000);
-        }
-
-        upgradeCost *= 2;
-        incomePerSecond *= 2;
-
-        updateUI();
-    }
-}
 
 //Mit Hilfe, um den text ständig upzudaten.
 
