@@ -81,6 +81,7 @@ function clickPhone() {
     saveGameState();
 }
 
+//W3-School Hilfe
 function moveBar() {
     var elem = document.getElementById("myBar");   
     var levelText = document.getElementById("levelText");   
@@ -122,7 +123,7 @@ function enlarge(element) {
     element.classList.toggle('enlarged');
 }
 
-// Tooltip
+// Tooltip -> mit KI zur Optimierung
 document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
     const elements = [
@@ -181,4 +182,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+function resetGame(){
+    //Autoklicks stoppen
+    if (teamUpgradeInterval) {
+        clearInterval(teamUpgradeInterval);
+        teamUpgradeInterval = null;
+    }
 
+    // LocalStorage zurücksetzen
+    localStorage.clear();
+
+    // Seite neu laden
+    location.reload();
+}
