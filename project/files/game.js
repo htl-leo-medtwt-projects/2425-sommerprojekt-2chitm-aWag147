@@ -4,20 +4,27 @@ let followers = 0;
 let clickCount = 0;
 let currentLevel = 1;
 let clicksForNextLevel = 100; 
-let clicks = 1;
+let clicks = 1; // wurde ergänzt
 const multiplier = 1.4; 
 const clickMoneyElement = document.getElementById("money-counter");
 const clickFollowerElement = document.getElementById("follower-counter");
 
+// Upgrades
+let teamUpgradeActive = false;
+let teamUpgradeInterval;
+let upgradeCostTeam = 100;
+let incomePerSecond = 2;
 
+let upgradeCostCamera = 100;
+let cameraUpgradeActive = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadGameState(); //Laden des Spielstands
+    loadGameState(); // Laden des Spielstands
     document.getElementById("levelText").textContent = `Level ${currentLevel}`;
     updateUI();
 });
 
-//Speichern des Spielstandes
+// Speichern des Spielstands
 function saveGameState() {
     localStorage.setItem('money', money);
     localStorage.setItem('followers', followers);
@@ -27,6 +34,8 @@ function saveGameState() {
     localStorage.setItem('upgradeCost', upgradeCostTeam);
     localStorage.setItem('incomePerSecond', incomePerSecond);
     localStorage.setItem('teamUpgradeActive', teamUpgradeActive);
+    localStorage.setItem('clicks', clicks);
+    localStorage.setItem('upgradeCostCamera', upgradeCostCamera);
 }
 
 // Laden des Spielstands
@@ -39,8 +48,11 @@ function loadGameState() {
     const savedUpgradeCost = parseInt(localStorage.getItem('upgradeCost'));
     const savedIncomePerSecond = parseInt(localStorage.getItem('incomePerSecond'));
     const savedTeamUpgradeActive = localStorage.getItem('teamUpgradeActive');
-    
+    const savedClicks = parseInt(localStorage.getItem('clicks'));
+    const savedUpgradeCostCamera = parseInt(localStorage.getItem('upgradeCostCamera'));
 
+
+    //KI Hilfe für isNan
     if (!isNaN(savedMoney)) money = savedMoney;
     if (!isNaN(savedFollowers)) followers = savedFollowers;
     if (!isNaN(savedClickCount)) clickCount = savedClickCount;
@@ -48,16 +60,16 @@ function loadGameState() {
     if (!isNaN(savedClicksForNextLevel)) clicksForNextLevel = savedClicksForNextLevel;
     if (!isNaN(savedUpgradeCost)) upgradeCostTeam = savedUpgradeCost;
     if (!isNaN(savedIncomePerSecond)) incomePerSecond = savedIncomePerSecond;
+    if (!isNaN(savedClicks)) clicks = savedClicks;
+    if (!isNaN(savedUpgradeCostCamera)) upgradeCostCamera = savedUpgradeCostCamera;
+
     teamUpgradeActive = savedTeamUpgradeActive === "true";
     loadUpgradeTeam();
 }
 
-//Klicker Logik
+// Klicker Logik
 function clickPhone() {
-    // Vergrößern oder verkleinern des Bildes
     enlarge(document.getElementById('phone'));
-    
-    // Geld und Follower erhöhen
     money += clicks;
     clickCount++;
 
@@ -66,23 +78,13 @@ function clickPhone() {
     }
 
     clickMoneyElement.classList.add("animate");
-
-    setTimeout(() => {
-        clickMoneyElement.classList.remove("animate");
-    }, 100); 
+    setTimeout(() => clickMoneyElement.classList.remove("animate"), 100);
 
     clickFollowerElement.classList.add("animate");
+    setTimeout(() => clickFollowerElement.classList.remove("animate"), 100);
 
-    setTimeout(() => {
-        clickFollowerElement.classList.remove("animate");
-    }, 100); 
-
-    
-    // Fortschrittsleiste aktualisieren
     moveBar();
     updateUI();
-
-    //Speichern
     saveGameState();
 }
 
@@ -91,69 +93,48 @@ function moveBar() {
     var levelText = document.getElementById("levelText");   
     let currentWidth = parseFloat(elem.style.width) || 0;
     
-    let progressPerClick = 100 / clicksForNextLevel; // Dynamische Fortschrittssteigerung
+    let progressPerClick = 100 / clicksForNextLevel;
     elem.style.width = Math.min(currentWidth + progressPerClick, 100) + '%';
     
-    // Level korrekt anzeigen
     levelText.textContent = `Level ${currentLevel}`;
     
     if (currentWidth + progressPerClick >= 100) {
-        console.log("Balken ist voll! Neues Level erreicht.");
-        
-        // Fortschrittsbalken resetten
         elem.style.width = '0%';  
-        
-        // Level erhöhen und Anforderung anpassen
         currentLevel++;
         clicksForNextLevel = Math.ceil(clicksForNextLevel * multiplier);
         levelText.textContent = `Level ${currentLevel}`;
     }
 }
 
-
 function updateUI() {
-    if(money > 1000 && money < 1000000){
+    if (money > 1000 && money < 1000000) {
         document.getElementById("money").textContent = (money / 1000).toFixed(2) + ' K';
-    }else{
-        if(money > 1000000){
-            document.getElementById("money").textContent = (money / 1000000).toFixed(2) + ' Mio';
-        }else{
-            document.getElementById("money").textContent = money;
-            
-        }
-    }
-    
-    if(followers > 1000 && followers < 1000000){
-        document.getElementById("followers").textContent = (followers / 1000).toFixed(2) + ' K';
-    }else{
-        if(followers > 1000000){
-            document.getElementById("followers").textContent = (followers / 1000000).toFixed(2) + ' Mio';
-        }else{
-            document.getElementById("followers").textContent = followers;
-            
-        }
-    }
-    
-    
-}
-
-// Klick Effekt, Mit Hilfe
-function enlarge(element) {
-    if (element.classList.contains('enlarged')) {
-        element.classList.remove('enlarged'); 
+    } else if (money >= 1000000) {
+        document.getElementById("money").textContent = (money / 1000000).toFixed(2) + ' Mio';
     } else {
-        element.classList.add('enlarged'); 
+        document.getElementById("money").textContent = money;
+    }
+
+    if (followers > 1000 && followers < 1000000) {
+        document.getElementById("followers").textContent = (followers / 1000).toFixed(2) + ' K';
+    } else if (followers >= 1000000) {
+        document.getElementById("followers").textContent = (followers / 1000000).toFixed(2) + ' Mio';
+    } else {
+        document.getElementById("followers").textContent = followers;
     }
 }
 
-//Mit Hilfe, um den text ständig upzudaten.
+// Klick Effekt
+function enlarge(element) {
+    element.classList.toggle('enlarged');
+}
 
+// Tooltip
 document.addEventListener("DOMContentLoaded", function () {
     const tooltip = document.getElementById("tooltip");
-
     const elements = [
         { id: "camera", text: null },
-        { id: "team", text: null }, // Der Text für "team" wird separat behandelt
+        { id: "team", text: null },
         { id: "smartphone", text: "Upgrade your phone." },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
@@ -167,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const element = document.getElementById(item.id);
         if (!element) return;
 
-        // Event listener für "mouseenter" zum Anzeigen des Tooltips
         element.addEventListener("mouseenter", (event) => {
             let newText = item.id === "team" ? `Hire a camera-team for ${upgradeCostTeam}$.` : 
                            item.id === "camera" ? `Invest in equipment for ${upgradeCostCamera}$.` : 
@@ -179,20 +159,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 tooltip.style.display = "block";
             }
 
-            // Tooltip-Position berechnen
             let mouseX = event.pageX;
             let mouseY = event.pageY;
             let tooltipWidth = tooltip.offsetWidth;
             let screenWidth = window.innerWidth;
 
-            // Prüfen, ob genug Platz nach rechts ist
             tooltip.style.left = (mouseX + tooltipWidth + 20 > screenWidth) ? 
                 `${mouseX - tooltipWidth - 15}px` : `${mouseX + 15}px`;
 
             tooltip.style.top = `${mouseY}px`;
         });
 
-        // Event listener für "mousemove" für dynamische Tooltip-Position
         element.addEventListener("mousemove", (event) => {
             let mouseX = event.pageX;
             let mouseY = event.pageY;
@@ -205,12 +182,62 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip.style.top = `${mouseY}px`;
         });
 
-        // Event listener für "mouseleave" zum Ausblenden des Tooltips
         element.addEventListener("mouseleave", () => {
             tooltip.style.display = "none";
         });
     });
 });
 
+// Team Upgrade
+function teamUpgrade() {
+    if (money >= upgradeCostTeam) {  
+        money -= upgradeCostTeam;
+        
+        if (!teamUpgradeActive) {
+            teamUpgradeActive = true;
+            teamUpgradeInterval = setInterval(() => {
+                money += incomePerSecond;
+                followers += incomePerSecond / 2;
+                updateUI();
+                saveGameState();
+            }, 1000);
+        }
 
+        upgradeCostTeam *= 2;
+        incomePerSecond *= 2;
 
+        updateUI();
+        saveGameState();
+    }
+}
+
+function loadUpgradeTeam() {
+    if (teamUpgradeActive && !teamUpgradeInterval) {
+        teamUpgradeInterval = setInterval(() => {
+            money += incomePerSecond;
+            followers += incomePerSecond / 2;
+            updateUI();
+            saveGameState();
+        }, 1000);
+    }
+
+    updateUI();
+}
+
+// Kamera Upgrade
+function cameraUpgrade() {
+    if (money >= upgradeCostCamera) {  
+        money -= upgradeCostCamera;
+
+        if (!cameraUpgradeActive) {
+            cameraUpgradeActive = true;
+            clicks *= 2;
+        }
+
+        clicks *= 2;
+        upgradeCostCamera *= 3;
+
+        updateUI();
+        saveGameState();
+    }
+}
