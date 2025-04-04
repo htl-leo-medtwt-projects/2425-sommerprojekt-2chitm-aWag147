@@ -7,8 +7,12 @@ let incomePerSecond = 2;
 
 //Team
 let upgradeCostCamera = 100;
-let cameraUpgradeActive = false;
 
+//Phone
+let upgradeCostPhone = 10000;
+
+//Youtube
+let upgradeCostYoutube = 50000;
 
 // Team Upgrade
 function teamUpgrade() {
@@ -50,12 +54,7 @@ function loadUpgradeTeam() {
 function cameraUpgrade() {
     if (money >= upgradeCostCamera) {  
         money -= upgradeCostCamera;
-
-        if (!cameraUpgradeActive) {
-            cameraUpgradeActive = true;
-            clicks *= 2;
-        }
-
+        
         clicks *= 2;
         upgradeCostCamera *= 3;
 
@@ -64,3 +63,31 @@ function cameraUpgrade() {
     }
 }
 
+
+//Phone Upgrade
+function phoneUpgrade(){
+    if (money >= upgradeCostPhone) {  
+        money -= upgradeCostPhone;
+
+        clicks *= 5;
+        upgradeCostPhone *= 3;
+
+        updateUI();
+        saveGameState();
+    }
+}
+
+
+// Second YouTube Channel
+function youtubeUpgrade() {
+    if (money >= upgradeCostYoutube) {  
+        money -= upgradeCostYoutube;
+
+        incomePerSecond *= 10;
+
+        upgradeCostYoutube *= 2;
+
+        updateUI();
+        saveGameState();
+    }
+}

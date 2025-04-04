@@ -191,19 +191,20 @@ body, html {
 
 .progression {
     border: black 3px solid;
-    border-radius: 10px;
+    border-radius: 7px;
     width: 25%;
     height: 24px;
     position: absolute;
-    top: 4%;
+    top: 3%;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.79);
 }
 
 #myBar {
     height: 100%;
     width: 0%;
-    background-color: rgba(33, 85, 217, 0.481);
+    background-color: rgba(47, 146, 227, 0.852);
     transition: width 0.3s ease-in-out;
     text-align: left;
     padding-left: 10px;
@@ -211,9 +212,11 @@ body, html {
 }
 
 #levelText{
-    color: white;
+    color: rgba(0, 0, 0, 0.862);
     font-family: coolvetica;
     z-index: 1;
+    position: absolute;
+    top: 1.5%;
 }
 
 /* Container 3 */
@@ -326,9 +329,10 @@ p{
 
 .buy-button {
     background-color: #5488e9;
+    box-shadow: 10px 7px 15px rgba(77, 77, 77, 0.347);
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px 10px;
     cursor: pointer;
     border-radius: 8px;
     margin: 3%;

@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             label.classList.add("grid-label");
 
             const buyButton = document.createElement("button");
-            buyButton.textContent = `Buy for \n $ ${price}`;
+            buyButton.textContent = `$ ${price}`;
             buyButton.classList.add("buy-button");
             buyButton.style.textAlign = "center";
             buyButton.style.whiteSpace = "pre-line";

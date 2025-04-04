@@ -29,6 +29,8 @@ function saveGameState() {
     localStorage.setItem('teamUpgradeActive', teamUpgradeActive);
     localStorage.setItem('clicks', clicks);
     localStorage.setItem('upgradeCostCamera', upgradeCostCamera);
+    localStorage.setItem('upgradeCostPhone', upgradeCostPhone);
+    localStorage.setItem('upgradeCostYoutube', upgradeCostYoutube);
 }
 
 // Laden des Spielstands
@@ -43,7 +45,8 @@ function loadGameState() {
     const savedTeamUpgradeActive = localStorage.getItem('teamUpgradeActive');
     const savedClicks = parseInt(localStorage.getItem('clicks'));
     const savedUpgradeCostCamera = parseInt(localStorage.getItem('upgradeCostCamera'));
-
+    const savedUpgradeCostPhone = parseInt(localStorage.getItem('upgradeCostPhone'));
+    const savedUpgradeCostYoutube = parseInt(localStorage.getItem('upgradeCostYoutube'))
 
     //KI Hilfe für isNan
     if (!isNaN(savedMoney)) money = savedMoney;
@@ -55,6 +58,8 @@ function loadGameState() {
     if (!isNaN(savedIncomePerSecond)) incomePerSecond = savedIncomePerSecond;
     if (!isNaN(savedClicks)) clicks = savedClicks;
     if (!isNaN(savedUpgradeCostCamera)) upgradeCostCamera = savedUpgradeCostCamera;
+    if (!isNaN(savedUpgradeCostPhone)) upgradeCostPhone = savedUpgradeCostPhone;
+    if (!isNaN(savedUpgradeCostYoutube)) upgradeCostYoutube = savedUpgradeCostYoutube;
 
     teamUpgradeActive = savedTeamUpgradeActive === "true";
     loadUpgradeTeam();
@@ -101,21 +106,8 @@ function moveBar() {
 }
 
 function updateUI() {
-    if (money > 1000 && money < 1000000) {
-        document.getElementById("money").textContent = (money / 1000).toFixed(2) + ' K';
-    } else if (money >= 1000000) {
-        document.getElementById("money").textContent = (money / 1000000).toFixed(2) + ' Mio';
-    } else {
-        document.getElementById("money").textContent = money;
-    }
-
-    if (followers > 1000 && followers < 1000000) {
-        document.getElementById("followers").textContent = (followers / 1000).toFixed(2) + ' K';
-    } else if (followers >= 1000000) {
-        document.getElementById("followers").textContent = (followers / 1000000).toFixed(2) + ' Mio';
-    } else {
-        document.getElementById("followers").textContent = followers;
-    }
+    document.getElementById("money").textContent = formatNumberFixed(money);
+    document.getElementById("followers").textContent = formatNumberFixed(followers);
 }
 
 // Klick Effekt
@@ -129,10 +121,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const elements = [
         { id: "camera", text: null },
         { id: "team", text: null },
-        { id: "smartphone", text: "Upgrade your phone." },
+        { id: "smartphone", text: null },
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
-        { id: "youtube", text: "Make another account." },
+        { id: "youtube", text: null },
         { id: "livechat", text: "Watch your livechat." },
         { id: "follower-counter", text: "Your followers." },
         { id: "money-counter", text: "Your money." }
@@ -143,9 +135,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!element) return;
 
         element.addEventListener("mouseenter", (event) => {
-            let newText = item.id === "team" ? `Hire a camera-team for ${upgradeCostTeam}$.` : 
-                           item.id === "camera" ? `Invest in equipment for ${upgradeCostCamera}$.` : 
-                           item.id === "smartphone" ? `Upgrade your phone for ${upgradeCostCamera}$.` :
+            let newText = item.id === "team" ? `Hire a camera-team for $${formatNumber(upgradeCostTeam)}` : 
+                           item.id === "camera" ? `Invest in equipment for $${formatNumber(upgradeCostCamera)}` : 
+                           item.id === "smartphone" ? `Upgrade phone for $${formatNumber(upgradeCostPhone)}` :
+                           item.id === "youtube" ? `2nd Account for $${formatNumber(upgradeCostYoutube)}` :
                            item.text;
 
             if (newText) {
@@ -194,4 +187,24 @@ function resetGame(){
 
     // Seite neu laden
     location.reload();
+}
+
+function formatNumberFixed(num) {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(2) + ' Mio';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(2) + ' K';
+    } else {
+        return num;
+    }
+}
+
+function formatNumber(num) {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(0) + 'Mio';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(0) + 'K';
+    } else {
+        return num;
+    }
 }
