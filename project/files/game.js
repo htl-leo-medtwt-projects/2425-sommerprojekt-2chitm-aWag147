@@ -4,19 +4,12 @@ let followers = 0;
 let clickCount = 0;
 let currentLevel = 1;
 let clicksForNextLevel = 100; 
-let clicks = 1; // wurde ergänzt
+let clicks = 1; 
 const multiplier = 1.4; 
 const clickMoneyElement = document.getElementById("money-counter");
 const clickFollowerElement = document.getElementById("follower-counter");
 
-// Upgrades
-let teamUpgradeActive = false;
-let teamUpgradeInterval;
-let upgradeCostTeam = 100;
-let incomePerSecond = 2;
 
-let upgradeCostCamera = 100;
-let cameraUpgradeActive = false;
 
 document.addEventListener("DOMContentLoaded", () => {
     loadGameState(); // Laden des Spielstands
@@ -188,56 +181,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Team Upgrade
-function teamUpgrade() {
-    if (money >= upgradeCostTeam) {  
-        money -= upgradeCostTeam;
-        
-        if (!teamUpgradeActive) {
-            teamUpgradeActive = true;
-            teamUpgradeInterval = setInterval(() => {
-                money += incomePerSecond;
-                followers += incomePerSecond / 2;
-                updateUI();
-                saveGameState();
-            }, 1000);
-        }
 
-        upgradeCostTeam *= 2;
-        incomePerSecond *= 2;
-
-        updateUI();
-        saveGameState();
-    }
-}
-
-function loadUpgradeTeam() {
-    if (teamUpgradeActive && !teamUpgradeInterval) {
-        teamUpgradeInterval = setInterval(() => {
-            money += incomePerSecond;
-            followers += incomePerSecond / 2;
-            updateUI();
-            saveGameState();
-        }, 1000);
-    }
-
-    updateUI();
-}
-
-// Kamera Upgrade
-function cameraUpgrade() {
-    if (money >= upgradeCostCamera) {  
-        money -= upgradeCostCamera;
-
-        if (!cameraUpgradeActive) {
-            cameraUpgradeActive = true;
-            clicks *= 2;
-        }
-
-        clicks *= 2;
-        upgradeCostCamera *= 3;
-
-        updateUI();
-        saveGameState();
-    }
-}
