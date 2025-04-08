@@ -14,6 +14,9 @@ let upgradeCostPhone = 10000;
 //Youtube
 let upgradeCostYoutube = 50000;
 
+//LiveChat
+let upgradeCostChat = 100;
+
 // Team Upgrade
 function teamUpgrade() {
     if (money >= upgradeCostTeam) {  
@@ -86,6 +89,19 @@ function youtubeUpgrade() {
         incomePerSecond *= 10;
 
         upgradeCostYoutube *= 2;
+
+        updateUI();
+        saveGameState();
+    }
+}
+
+
+//Live-Chat
+function liveChat(){
+    if (money >= upgradeCostChat) {  
+        money -= upgradeCostChat;
+
+        document.getElementById('chatContainer').style.display = 'block';
 
         updateUI();
         saveGameState();

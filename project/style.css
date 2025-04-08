@@ -187,6 +187,38 @@ body, html {
     z-index: 10;
 }
 
+/* Chat */
+
+#chatContainer {
+    width: 20%;
+    height: 60%;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* aber nicht sichtbar */
+    display: none;
+}
+
+
+.message {
+    background: #e0e0e0ca;
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    width: fit-content;
+    max-width: 80%;
+    font-family: coolvetica;
+  }
+  .from-me {
+    align-self: flex-end;
+    background: #cce5ff;
+  }
+
 /* Progress bar */
 
 .progression {

@@ -213,3 +213,49 @@ function formatNumber(num) {
         return num;
     }
 }
+
+
+//Chat
+const messages = [
+    "User123: That was insane!",
+    "NightBot: Remember to like and subscribe!",
+    "GamerGirl: Let's goooo 🔥🔥🔥",
+    "NoScopeKing: CLUTCH!!!",
+    "Moderator: Please be respectful in chat.",
+    "Viewer42: I can’t believe that just happened",
+    "StreamerFan99: You’re cracked bro 😂",
+    "CamperSlayer: RIP enemies 💀",
+    "WackyWaffles: Pog moment!",
+    "NightBot: Join our Discord: discord.gg/xyz",
+    "User123: I'm clipping that for sure",
+    "SpeedyG: Fastest round ever",
+    "ProGamer: That was so clean!",
+    "StreamerFan99: Love this stream fr 💯",
+    "User42: When's the next collab?",
+    "NoScopeKing: MVP plays all day Cigany😎",
+    "Moderator: Chill with the spam, please.",
+    "NightBot: Follow on Twitter @StreamerXYZ",
+    "GamerGirl: What a W!"
+  ];
+
+  const chatContainer = document.getElementById("chatContainer");
+  let msgIndex = 0;
+
+  function addMessage() {
+    if (msgIndex >= messages.length) {
+      msgIndex = 0; // Loop if needed
+    }
+
+    const bubble = document.createElement("div");
+    bubble.classList.add("message");
+    bubble.textContent = messages[msgIndex];
+    chatContainer.appendChild(bubble);
+
+    // Auto-scroll to bottom
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+
+    msgIndex++;
+    setTimeout(addMessage, 1200); // New message every 1.2 sec
+  }
+
+  addMessage();
