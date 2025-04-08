@@ -31,6 +31,7 @@ function saveGameState() {
     localStorage.setItem('upgradeCostCamera', upgradeCostCamera);
     localStorage.setItem('upgradeCostPhone', upgradeCostPhone);
     localStorage.setItem('upgradeCostYoutube', upgradeCostYoutube);
+    localStorage.setItem('liveIsOn', liveIsOn);
 }
 
 // Laden des Spielstands
@@ -47,6 +48,12 @@ function loadGameState() {
     const savedUpgradeCostCamera = parseInt(localStorage.getItem('upgradeCostCamera'));
     const savedUpgradeCostPhone = parseInt(localStorage.getItem('upgradeCostPhone'));
     const savedUpgradeCostYoutube = parseInt(localStorage.getItem('upgradeCostYoutube'))
+    const savedLiveIsOn = localStorage.getItem('liveIsOn');
+        liveIsOn = savedLiveIsOn === "true";
+    if (liveIsOn) {
+        document.getElementById('chatContainer').style.display = 'block';
+    }
+
 
     //KI Hilfe für isNan
     if (!isNaN(savedMoney)) money = savedMoney;

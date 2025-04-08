@@ -16,6 +16,7 @@ let upgradeCostYoutube = 50000;
 
 //LiveChat
 let upgradeCostChat = 100;
+let liveIsOn = false;
 
 // Team Upgrade
 function teamUpgrade() {
@@ -101,6 +102,7 @@ function liveChat(){
     if (money >= upgradeCostChat) {  
         money -= upgradeCostChat;
 
+        liveIsOn = true;
         document.getElementById('chatContainer').style.display = 'block';
 
         updateUI();
