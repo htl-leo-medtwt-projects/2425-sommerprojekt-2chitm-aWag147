@@ -2,40 +2,59 @@ document.addEventListener("DOMContentLoaded", function () {
     const container3 = document.getElementById("container3");
 
     function createGrid(category, items) {
+        // Erstellt eine neue Section für jede Kategorie (Themes, Cursor, Music)
         const section = document.createElement("section");
         section.classList.add("category-section");
         section.id = category.toLowerCase();
         section.style.display = "none"; // Standardmäßig versteckt
-
+    
         const gridContainer = document.createElement("div");
         gridContainer.classList.add("grid-container");
-
+    
         items.forEach(({ name, price }) => {
             const box = document.createElement("div");
             box.classList.add("grid-item");
-
+    
             const img = document.createElement("img");
             img.src = `media/img/shop/${name}.png`;
             img.alt = name;
             img.classList.add("grid-image");
-
+    
             const label = document.createElement("p");
             label.textContent = name;
             label.classList.add("grid-label");
-
+    
             const buyButton = document.createElement("button");
             buyButton.textContent = `$ ${price}`;
             buyButton.classList.add("buy-button");
             buyButton.style.textAlign = "center";
             buyButton.style.whiteSpace = "pre-line";
-
+    
+            // 🆕 Event-Listener für Kauf-Buttons, je nach Kategorie unterschiedlich
+            buyButton.addEventListener("click", () => {
+                if (category === "Themes") {
+                    activateTheme(name); // z.B. activateTheme("sun")
+                } else if (category === "Cursor") {
+                    activateCursor(name); // z.B. activateCursor("wave")
+                } else if (category === "Music") {
+                    playMusic(name); // z.B. playMusic("lofi")
+                }
+            });
+    
+            // Fügt Bild, Text und Button in die Box ein
             box.append(img, label, buyButton);
+    
+            // Fügt die Box dem Grid-Container hinzu
             gridContainer.appendChild(box);
         });
-
+    
+        // Fügt das Grid dem aktuellen Kategorien-Abschnitt hinzu
         section.appendChild(gridContainer);
+    
+        // Fügt die Section dem Hauptcontainer hinzu
         container3.appendChild(section);
     }
+    
 
     const categories = {
         Music: [

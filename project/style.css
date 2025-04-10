@@ -1,6 +1,7 @@
 body, html {
     margin: 0;
     overflow: hidden;
+    cursor: url('media/img/shop/diamond.png'), auto;
 }    
 
 @font-face {
@@ -615,5 +616,14 @@ p{
 }
   
 
-  
+
+    
+  /* Shop */
+  /* Themes */
+
+  .theme-night .container {background-image: url("media/img/themes/night.jpg");}
+  .theme-sun .container { background-color: white; color: black; }
+
+
+
   

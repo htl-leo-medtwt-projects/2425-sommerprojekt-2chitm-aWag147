@@ -50,8 +50,10 @@ function loadGameState() {
     const savedUpgradeCostYoutube = parseInt(localStorage.getItem('upgradeCostYoutube'))
     const savedLiveIsOn = localStorage.getItem('liveIsOn');
         liveIsOn = savedLiveIsOn === "true";
+
     if (liveIsOn) {
         document.getElementById('chatContainer').style.display = 'block';
+        document.getElementById('livechat').style.display = 'none';
     }
 
 
@@ -132,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { id: "shop", text: "Buy fun things in the shop." },
         { id: "settings", text: "Change your settings." },
         { id: "youtube", text: null },
-        { id: "livechat", text: "Watch your livechat." },
+        { id: "livechat", text: null },
         { id: "follower-counter", text: "Your followers." },
         { id: "money-counter", text: "Your money." }
     ];
@@ -146,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
                            item.id === "camera" ? `Invest in equipment for $${formatNumber(upgradeCostCamera)}` : 
                            item.id === "smartphone" ? `Upgrade phone for $${formatNumber(upgradeCostPhone)}` :
                            item.id === "youtube" ? `2nd Account for $${formatNumber(upgradeCostYoutube)}` :
+                           item.id === "livechat" ? `Go live for $${formatNumber(upgradeCostChat)}` :
                            item.text;
 
             if (newText) {

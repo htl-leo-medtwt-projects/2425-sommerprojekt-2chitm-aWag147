@@ -15,7 +15,7 @@ let upgradeCostPhone = 10000;
 let upgradeCostYoutube = 50000;
 
 //LiveChat
-let upgradeCostChat = 100;
+let upgradeCostChat = 100000;
 let liveIsOn = false;
 
 // Team Upgrade
@@ -104,8 +104,11 @@ function liveChat(){
 
         liveIsOn = true;
         document.getElementById('chatContainer').style.display = 'block';
+        document.getElementById('livechat').style.display = 'none';
 
         updateUI();
         saveGameState();
+
+        
     }
 }
