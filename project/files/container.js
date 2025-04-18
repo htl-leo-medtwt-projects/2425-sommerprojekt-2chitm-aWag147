@@ -14,15 +14,36 @@ document.addEventListener('keydown', function(event) {
             container1.style.position = 'absolute';
             container2.style.display = 'flex';
             container2.style.animation = 'fade-in 1s forwards';
+
+            // Musik automatisch abspielen, falls vorhanden und noch nicht aktiv
+            const savedMusic = localStorage.getItem("currentMusic");
+
+            if (savedMusic && (!currentMusic || currentMusic.paused)) {
+                switchMusic(savedMusic);
+            }
         }, 1000);
     }
 });
+
+
+
+//Musik spielen bei seiten-reload
+window.addEventListener("load", () => {
+    const savedMusic = localStorage.getItem("currentMusic");
+    if (savedMusic) {
+        switchMusic(savedMusic);
+    }
+});
+
 
 function shop() {
     container3.classList.add("slide-up");
     container3.classList.remove("slide-down");
     switchCategory("music");
+
+    document.getElementById("money-counter-shop").innerHTML = `💰 ${money.toFixed(2)}`;
 }
+
 
 
 function back() {

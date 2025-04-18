@@ -30,14 +30,19 @@ document.addEventListener("DOMContentLoaded", function () {
             buyButton.style.textAlign = "center";
             buyButton.style.whiteSpace = "pre-line";
     
-            // 🆕 Event-Listener für Kauf-Buttons, je nach Kategorie unterschiedlich
+            //  Event-Listener für Kauf-Buttons, je nach Kategorie unterschiedlich
+            if (category === "Music") {
+                buyButton.classList.add("music-button");
+                buyButton.dataset.name = name;
+            }
+            
             buyButton.addEventListener("click", () => {
                 if (category === "Themes") {
-                    activateTheme(name); // z.B. activateTheme("sun")
+                    activateTheme(name);
                 } else if (category === "Cursor") {
-                    activateCursor(name); // z.B. activateCursor("wave")
+                    activateCursor(name);
                 } else if (category === "Music") {
-                    playMusic(name); // z.B. playMusic("lofi")
+                    playMusic(name);
                 }
             });
     

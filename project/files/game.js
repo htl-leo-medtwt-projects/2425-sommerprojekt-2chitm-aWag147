@@ -117,6 +117,7 @@ function moveBar() {
 function updateUI() {
     document.getElementById("money").textContent = formatNumberFixed(money);
     document.getElementById("followers").textContent = formatNumberFixed(followers);
+    document.getElementById("money-shop").textContent = formatNumberFixed(money);
 }
 
 // Klick Effekt

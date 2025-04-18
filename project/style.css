@@ -58,32 +58,29 @@ body, html {
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 
-    display: block;
+    flex-direction: column;
+    text-align: center;
 }
 
 #start-h1 {
     font-family: copyduck;
-    position: absolute;
-    left: 25%;
-    top: 30%;
-    font-size: 80px;
+    font-size: 600%;
     opacity: 0.92;
     text-shadow: 10px 20px 15px rgb(77, 77, 77);
     animation: start-h1 5s infinite none;
     color: rgb(243, 243, 243);
+    margin: 0;
 }
 
 #start-p {
     font-family: coolvetica;
-    position: absolute;
-    top: 48%;
-    left: 42%;
     color: rgb(243, 243, 243);
-    opacity: 0.92;
-    text-shadow: 10px 20px 15px rgb(77, 77, 77);
     opacity: 0; 
+    text-shadow: 10px 20px 15px rgb(77, 77, 77);
     animation: start-p 1s ease-in-out 2s forwards; 
+    margin-top: 20px;
 }
+
 
 
 
@@ -134,6 +131,8 @@ body, html {
     right: 20px;
     transition: all 0.2s ease;
 }
+
+
 
 .animate{
     transform: scale(1.08);
@@ -270,6 +269,17 @@ body, html {
 
 p{
     color: black;
+}
+
+#money-counter-shop{
+    top: 20px;
+    right: 20px;
+    position: absolute;
+    font-family: coolvetica;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 5px black;
 }
 
 /*KI für !important */
@@ -621,9 +631,11 @@ p{
   /* Shop */
   /* Themes */
 
-  .theme-night .container {background-image: url("media/img/themes/night.jpg");}
-  .theme-sun .container { background-color: white; color: black; }
 
 
 
-  
+
+  .music-button.bought {
+    background-color: #4caf50; /* Grün oder was du willst */
+    color: white;
+}

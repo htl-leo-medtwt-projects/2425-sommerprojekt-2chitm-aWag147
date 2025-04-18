@@ -109,6 +109,5 @@ function liveChat(){
         updateUI();
         saveGameState();
 
-        
     }
 }
