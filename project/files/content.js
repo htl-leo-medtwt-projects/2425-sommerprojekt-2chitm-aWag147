@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             buyButton.addEventListener("click", () => {
                 if (category === "ClickSounds") {
-                    activateTheme(name); // Später evtl. zu activateClickSound() umbenennen
+                    activateClickSound(name); 
                 } else if (category === "Cursor") {
                     activateCursor(name);
                 } else if (category === "Music") {
@@ -80,11 +80,11 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         ClickSounds: [ // Neue Kategorie mit lustigen Click-Sounds
             { name: "popcorn-click", price: "10k" },
-            { name: "laser-zap", price: "25k" },
             { name: "rubber-duck", price: "50k" },
             { name: "boing", price: "100k" },
             { name: "cat-meow", price: "500k" },
-            { name: "meme-wow", price: "5Mio" }
+            { name: "meme-wow", price: "5Mio" },
+            { name: "stop-the-cap", price: "10Mio" }
         ]
     };
 
