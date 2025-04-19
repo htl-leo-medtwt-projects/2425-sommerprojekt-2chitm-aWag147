@@ -1,3 +1,4 @@
+
 // Klicker-Logik
 let money = 0.0;
 let followers = 0;
@@ -8,6 +9,8 @@ let clicks = 1;
 const multiplier = 1.4; 
 const clickMoneyElement = document.getElementById("money-counter");
 const clickFollowerElement = document.getElementById("follower-counter");
+
+
 
 
 
@@ -118,6 +121,7 @@ function updateUI() {
     document.getElementById("money").textContent = formatNumberFixed(money);
     document.getElementById("followers").textContent = formatNumberFixed(followers);
     document.getElementById("money-shop").textContent = formatNumberFixed(money);
+
 }
 
 // Klick Effekt

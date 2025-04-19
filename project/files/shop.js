@@ -1,8 +1,7 @@
-let boughtMusic = {};
+let boughtMusic = JSON.parse(localStorage.getItem('boughtMusic')) || {};  // Laden aus localStorage oder leeres Objekt, mit KI
 let currentMusic = null;
 
-
-//KI für formatMoneyString(), updateMoneyUI
+// KI für formatMoneyString(), updateMoneyUI
 function formatMoneyString(str) {
     const multiplier = {
         "k": 1000,
@@ -45,9 +44,9 @@ function playMusic(name) {
     if (money >= price) {
         money -= price;
         boughtMusic[name] = true;
+        localStorage.setItem('boughtMusic', JSON.stringify(boughtMusic));  // Speichern im LocalStorage, JSON.tringify(boughtMusic)) mit KI
         updateMoneyUI();
 
-       
         const button = document.querySelector(`.music-button[data-name="${name}"]`);
         if (button) button.textContent = "Select";
 
@@ -57,7 +56,18 @@ function playMusic(name) {
     }
 }
 
+// Gekaufte Musik laden
+function loadPurchasedMusic() {
+    const musicButtons = document.querySelectorAll('.music-button');
+    musicButtons.forEach(button => {
+        const musicName = button.getAttribute('data-name');
+        if (boughtMusic[musicName]) {
+            button.textContent = 'Select';
+        }
+    });
+}
 
+// Musik wechseln
 function switchMusic(name) {
     if (currentMusic) {
         currentMusic.pause();
@@ -80,3 +90,13 @@ const contentMusicPrices = {
     "jazz": "10k",
     "classic": "10k"
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    loadPurchasedMusic();  // Lade gekaufte Musikstücke beim Start
+
+    // Lade die zuletzt abgespielte Musik und spiele sie ab, wenn vorhanden
+    const savedMusic = localStorage.getItem('currentMusic');
+    if (savedMusic && boughtMusic[savedMusic]) {
+        switchMusic(savedMusic);
+    }
+});

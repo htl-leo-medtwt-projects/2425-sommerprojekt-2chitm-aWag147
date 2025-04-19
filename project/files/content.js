@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container3 = document.getElementById("container3");
+    loadPurchasedMusic();
 
     function createGrid(category, items) {
         // Erstellt eine neue Section für jede Kategorie (Themes, Cursor, Music)
@@ -139,8 +140,10 @@ function addLabelToContainer() {
     function toggleMusic() {
         if (muteMusic.innerText === "Mute Music") {
             muteMusic.innerText = "Play Music";
+            currentMusic.volume = 0;
         } else {
             muteMusic.innerText = "Mute Music";
+            currentMusic.volume = 0.3;
         }
     }
 
