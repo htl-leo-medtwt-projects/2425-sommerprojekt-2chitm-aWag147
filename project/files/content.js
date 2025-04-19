@@ -3,64 +3,63 @@ document.addEventListener("DOMContentLoaded", function () {
     loadPurchasedMusic();
 
     function createGrid(category, items) {
-        // Erstellt eine neue Section für jede Kategorie (Themes, Cursor, Music)
+        // Erstellt eine neue Section für jede Kategorie (ClickSounds, Cursor, Music)
         const section = document.createElement("section");
         section.classList.add("category-section");
         section.id = category.toLowerCase();
         section.style.display = "none"; // Standardmäßig versteckt
-    
+
         const gridContainer = document.createElement("div");
         gridContainer.classList.add("grid-container");
-    
+
         items.forEach(({ name, price }) => {
             const box = document.createElement("div");
             box.classList.add("grid-item");
-    
+
             const img = document.createElement("img");
             img.src = `media/img/shop/${name}.png`;
             img.alt = name;
             img.classList.add("grid-image");
-    
+
             const label = document.createElement("p");
             label.textContent = name;
             label.classList.add("grid-label");
-    
+
             const buyButton = document.createElement("button");
             buyButton.textContent = `$ ${price}`;
             buyButton.classList.add("buy-button");
             buyButton.style.textAlign = "center";
             buyButton.style.whiteSpace = "pre-line";
-    
+
             //  Event-Listener für Kauf-Buttons, je nach Kategorie unterschiedlich
             if (category === "Music") {
                 buyButton.classList.add("music-button");
                 buyButton.dataset.name = name;
             }
-            
+
             buyButton.addEventListener("click", () => {
-                if (category === "Themes") {
-                    activateTheme(name);
+                if (category === "ClickSounds") {
+                    activateTheme(name); // Später evtl. zu activateClickSound() umbenennen
                 } else if (category === "Cursor") {
                     activateCursor(name);
                 } else if (category === "Music") {
                     playMusic(name);
                 }
             });
-    
+
             // Fügt Bild, Text und Button in die Box ein
             box.append(img, label, buyButton);
-    
+
             // Fügt die Box dem Grid-Container hinzu
             gridContainer.appendChild(box);
         });
-    
+
         // Fügt das Grid dem aktuellen Kategorien-Abschnitt hinzu
         section.appendChild(gridContainer);
-    
+
         // Fügt die Section dem Hauptcontainer hinzu
         container3.appendChild(section);
     }
-    
 
     const categories = {
         Music: [
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { name: "jazz", price: "10k" },
             { name: "classic", price: "10k" }
         ],
-        Cursor: [ 
+        Cursor: [
             { name: "blue", price: "1k" },
             { name: "wave", price: "20k" },
             { name: "ice", price: "50k" },
@@ -79,13 +78,13 @@ document.addEventListener("DOMContentLoaded", function () {
             { name: "star", price: "1Mio" },
             { name: "diamond", price: "10Mio" }
         ],
-        Themes: [
-            { name: "sun", price: "10k" },
-            { name: "night", price: "25k" },
-            { name: "fog", price: "50k" },
-            { name: "rain", price: "100k" },
-            { name: "snow", price: "500k" },
-            { name: "gold", price: "5Mio" }
+        ClickSounds: [ // Neue Kategorie mit lustigen Click-Sounds
+            { name: "popcorn-click", price: "10k" },
+            { name: "laser-zap", price: "25k" },
+            { name: "rubber-duck", price: "50k" },
+            { name: "boing", price: "100k" },
+            { name: "cat-meow", price: "500k" },
+            { name: "meme-wow", price: "5Mio" }
         ]
     };
 
@@ -101,16 +100,17 @@ document.addEventListener("DOMContentLoaded", function () {
         // Button-Hintergrundfarben aktualisieren
         document.getElementById("music-button").style.backgroundColor = activeId === "music" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
         document.getElementById("cursor-button").style.backgroundColor = activeId === "cursor" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
-        document.getElementById("themes-button").style.backgroundColor = activeId === "themes" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
+        document.getElementById("clicksounds-button").style.backgroundColor = activeId === "clicksounds" ? "lightgray" : "rgba(255, 255, 255, 0.8)";
     }
 
     // Event-Listener für die Buttons, um die Kategorien zu wechseln
     document.getElementById("music-button").addEventListener("click", () => switchCategory("music"));
     document.getElementById("cursor-button").addEventListener("click", () => switchCategory("cursor"));
-    document.getElementById("themes-button").addEventListener("click", () => switchCategory("themes"));
+    document.getElementById("clicksounds-button").addEventListener("click", () => switchCategory("clicksounds"));
 
-    switchCategory("music");
+    switchCategory("music"); // Startet mit geöffneter Musik-Kategorie
 });
+
 
 //Label Volume
 //From Uiverse.io by seyed-mohsen-mousavi --> 
