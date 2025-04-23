@@ -1,8 +1,15 @@
 body, html {
     margin: 0;
     overflow: hidden;
-    cursor: url('media/img/shop/diamond.png'), auto;
-}    
+    cursor: var(--custom-cursor);
+}  
+
+/* Cursor */
+:root {
+    --custom-cursor: url('media/cursors/default.png'), auto;
+  }
+  
+
 
 @font-face {
     font-family: copyduck;

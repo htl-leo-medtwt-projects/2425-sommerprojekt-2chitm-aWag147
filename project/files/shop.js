@@ -118,8 +118,7 @@ function activateClickSound(name) {
         localStorage.setItem('boughtClickSounds', JSON.stringify(boughtClickSounds));
         updateMoneyUI();
 
-        const button = document.querySelector(`.clicksounds-section .buy-button[data-name="${name}"]`);
-        if (button) button.textContent = "Select";
+        loadPurchasedClickSounds();
 
         selectClickSound(name);
     } else {
@@ -133,14 +132,18 @@ function selectClickSound(name) {
 }
 
 function loadPurchasedClickSounds() {
-    const clickButtons = document.querySelectorAll('.clicksounds-section .buy-button');
+    const clickButtons = document.querySelectorAll('.clicksounds-section .buy-button');  
+    const savedClick = localStorage.getItem('currentClickSound'); // aktuelle Auswahl
+
     clickButtons.forEach(button => {
         const soundName = button.getAttribute('data-name');
         if (boughtClickSounds[soundName]) {
-            button.textContent = 'Select';
+            button.textContent = (soundName === savedClick) ? 'Selected' : 'Select';
         }
     });
 }
+
+
 
 const contentClickSoundPrices = {
     "popcorn-click": "10k",
@@ -167,6 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (savedClick && boughtClickSounds[savedClick]) {
         selectClickSound(savedClick);
     }
+
+    loadPurchasedCursors();
+
+    const savedCursor = localStorage.getItem('currentCursor');
+    if (savedCursor && boughtCursors[savedCursor]) {
+        selectCursor(savedCursor);
+    }
+
 });
 
 
@@ -179,3 +190,67 @@ document.addEventListener('click', () => {
     }
 });
 
+
+//Cursors
+
+function activateCursor(name) {
+    const cursorPrice = formatMoneyString(cursorPrices[name]);
+    if (boughtCursors[name]) {
+        selectCursor(name);
+        return;
+    }
+
+    if (money >= cursorPrice) {
+        money -= cursorPrice;
+        boughtCursors[name] = true;
+        localStorage.setItem('boughtCursors', JSON.stringify(boughtCursors));
+        updateMoneyUI();
+
+        loadPurchasedCursors();
+
+        selectCursor(name);
+    } else {
+        alert("Nicht genug Geld!");
+    }
+}
+
+function selectCursor(name) {
+    document.documentElement.style.setProperty('--custom-cursor', `url('media/cursors/${name}.png'), auto`); //KI Hilfe
+    localStorage.setItem('currentCursor', name);
+
+    // Buttons aktualisieren
+    const buttons = document.querySelectorAll('.cursor-section .buy-button');
+    buttons.forEach(btn => {
+        const btnName = btn.dataset.name;
+        if (btnName === name) {
+            btn.textContent = "Selected";
+        } else if (boughtCursors[btnName]) {
+            btn.textContent = "Select";
+        }
+    });
+}
+
+function loadPurchasedCursors() {
+    const cursorButtons = document.querySelectorAll('.cursor-section .buy-button');
+    const savedCursor = localStorage.getItem('currentCursor'); // aktuelle Auswahl
+
+    cursorButtons.forEach(button => {
+        const name = button.dataset.name;
+        if (boughtCursors[name]) {
+            button.textContent = (name === savedCursor) ? 'Selected' : 'Select';
+        }
+    });
+}
+
+
+
+//Localstorage
+let boughtCursors = JSON.parse(localStorage.getItem('boughtCursors')) || {};
+const cursorPrices = {
+    "blue": "1k",
+    "wave": "20k",
+    "ice": "50k",
+    "rocket": "100k",
+    "star": "1Mio",
+    "diamond": "10Mio"
+};

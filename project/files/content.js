@@ -1,8 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     const container3 = document.getElementById("container3");
     loadPurchasedMusic();
+    loadPurchasedClickSounds();  
+    loadPurchasedCursors();      
 
     function createGrid(category, items) {
+
+        
         // Erstellt eine neue Section für jede Kategorie (ClickSounds, Cursor, Music)
         const section = document.createElement("section");
         section.classList.add("category-section");
