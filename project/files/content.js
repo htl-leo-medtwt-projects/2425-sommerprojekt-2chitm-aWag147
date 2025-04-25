@@ -30,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function () {
             label.classList.add("grid-label");
 
             const buyButton = document.createElement("button");
+            const gradient = document.createElement("canvas");
+            gradient.classList.add("canvas-basic");
             buyButton.textContent = `$ ${price}`;
             buyButton.classList.add("buy-button");
             buyButton.style.textAlign = "center";
