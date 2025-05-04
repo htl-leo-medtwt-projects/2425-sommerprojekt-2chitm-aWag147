@@ -88,6 +88,17 @@ body, html {
     margin-top: 20px;
 }
 
+#infoImg{
+    width: 3%;
+    position: absolute;
+    top: 2%;
+    right: 1%;
+    transition: all 0.5s;
+}
+
+#infoImg:hover{
+    transform: scale(1.1);
+}
 
 
 

@@ -64,28 +64,4 @@ function settingsBack(){
     container4.classList.remove("slide-up");
 }
 
-//Library
-// Erstelle Granim-Instanzen für jeden Button
-document.querySelectorAll('.buy-button').forEach(button => {
-    // Erstelle Canvas-Element
-    const canvas = document.createElement('canvas');
-    canvas.className = 'canvas-basic';
-    button.prepend(canvas); // Füge Canvas dem Button hinzu
-    
-    // Initialisiere Granim für diesen Canvas
-    new Granim({
-        element: canvas,
-        direction: 'left-right',
-        isPausedWhenNotInView: true,
-        states: {
-            "default-state": {
-                gradients: [
-                    ['#ff9966', '#ff5e62'],
-                    ['#00F260', '#0575E6'],
-                    ['#e1eec3', '#f05053']
-                ],
-                transitionSpeed: 2000
-            }
-        }
-    });
-});
+

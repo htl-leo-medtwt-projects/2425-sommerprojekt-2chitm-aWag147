@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- LIBRARY pagePiling.js -->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Game Guide</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="Game Instructions and Shop Overview" />
+	<meta name="keywords" content="game, shop, tips, guide, pagepiling" />
+	<meta name="Resource-type" content="Document" />
+
+	<link rel="stylesheet" type="text/css" href="jquery.pagepiling.css" />
+	<link rel="stylesheet" type="text/css" href="examples.css" />
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.pagepiling.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('#pagepiling').pagepiling({
+				menu: '#menu',
+				anchors: ['page1', 'page2', 'page3'],
+				loopTop: true,
+				loopBottom: true
+				
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	<ul id="menu">
+		<li><a href="index.html">Return</a></li>
+		<li data-menuanchor="page1" class="active"><a href="#page1">How the Game Works</a></li>
+		<li data-menuanchor="page2"><a href="#page2">The In-Game Shop</a></li>
+		<li data-menuanchor="page3"><a href="#page3">Tips & Progress</a></li>
+	</ul>
+
+	<div id="pagepiling">
+		<div class="section" id="section1">
+			<h1>How the Game Works</h1>
+            <p>In Clickfluencer, you have to tap on the phone to earn money and followers. The more you click, the more you earn! Use your earnings to unlock powerful upgrades and exclusive items in the <a href="#page2">Shop</a>, which will help you level up faster and gain more followers. Click your way to success!</p>
+
+
+		</div>
+		<div class="section" id="section2">
+			<h1>The In-Game Shop</h1>
+            <p>Use your hard-earned points to unlock exciting new music, cool click sounds, and unique cursor styles! Each item you unlock is automatically saved, so you can enjoy your customizations while playing and truly make the game your own.</p>
+		</div>
+		<div class="section" id="section3">
+			<h1>Tips & Progress</h1>
+            <p>The more you play, the more you achieve in-game! Upgrades are key to boosting your progress. Have fun playing and keep unlocking new possibilities!</p>
+		</div>
+	</div>
+
+</body>
+</html>
