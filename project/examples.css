@@ -3,6 +3,8 @@ body {
     font-family: 'Lato', sans-serif;
     color: #f2f2f2;
 	font-family: coolvetica;
+   
+
 }
 
 @font-face {
@@ -13,17 +15,20 @@ body {
 h1 {
     font-size: 4em;
     margin-bottom: 20px;
+    text-shadow: 10px 20px 15px rgb(77, 77, 77);
 }
 
 p {
     font-size: 1.2em;
     width: 70%;
     margin: 0 auto;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 a{
 	text-decoration: none;
 	color: rgb(122, 220, 255);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .section {
@@ -38,15 +43,25 @@ a{
 /* Blue backgrounds */
 /* Background colors for each pagepiling section */
 #pagepiling .pp-section:nth-child(1) {
-    background-color: #145e8f; /* dark blue */
+    background-image: url('media/img/clouds.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+
 }
 
 #pagepiling .pp-section:nth-child(2) {
-    background-color: #1462aa; /* medium blue */
+    background-image: url('media/img/clouds\ -\ left.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 #pagepiling .pp-section:nth-child(3) {
-    background-color: #1878c7; /* light blue */
+    background-image: url('media/img/clouds.jpg');
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
 }
 
 
