@@ -83,7 +83,7 @@ body, html {
     font-family: coolvetica;
     color: rgb(243, 243, 243);
     opacity: 0; 
-    text-shadow: 10px 20px 15px rgb(77, 77, 77);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
     animation: start-p 1s ease-in-out 2s forwards; 
     margin-top: 20px;
 }
@@ -94,7 +94,9 @@ body, html {
     top: 2%;
     right: 1%;
     transition: all 0.5s;
-    opacity: 0.8;
+    opacity: 0.9;
+    text-shadow: 10px 20px 15px rgb(77, 77, 77);
+
 }
 
 #infoImg:hover{

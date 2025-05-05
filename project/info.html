@@ -5,30 +5,221 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Game Guide</title>
-	<meta name="author" content="Alvaro Trigo Lopez" />
-	<meta name="description" content="Game Instructions and Shop Overview" />
-	<meta name="keywords" content="game, shop, tips, guide, pagepiling" />
-	<meta name="Resource-type" content="Document" />
 
 	<link rel="stylesheet" type="text/css" href="jquery.pagepiling.css" />
 	<link rel="stylesheet" type="text/css" href="examples.css" />
 
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript" src="jquery.pagepiling.min.js"></script>
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Lato', sans-serif;
+			color: #f2f2f2;
+			font-family: coolvetica;
+			overflow-x: hidden;
+		}
+
+		@font-face {
+			font-family: coolvetica;
+			src: url(media/Coolvetica\ Rg.otf);
+		}
+
+		h1 {
+			font-size: 4em;
+			margin-bottom: 20px;
+			text-shadow: 10px 20px 15px rgb(77, 77, 77);
+			opacity: 0;
+			transform: translateY(30px);
+			transition: all 1s ease-out;
+		}
+
+		p {
+			font-size: 1.2em;
+			width: 70%;
+			margin: 20px auto 0;
+			text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+			opacity: 0;
+			transform: translateY(30px);
+			transition: all 1s ease-out 0.3s;
+		}
+
+		a{
+			text-decoration: none;
+			color: rgb(122, 220, 255);
+			text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+		}
+
+		.section {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			text-align: center;
+		}
+
+		/* Hilfe von KI für Loading Animation */
+		#pagepiling .pp-section:nth-child(1) {
+			background-image: url('media/img/clouds.jpg');
+			background-size: cover; 
+			background-position: center; 
+			background-repeat: no-repeat; 
+		}
+
+		#pagepiling .pp-section:nth-child(2) {
+			background-image: url('media/img/clouds\ -\ left.jpg');
+			background-size: cover; 
+			background-position: center; 
+			background-repeat: no-repeat; 
+		}
+
+		#pagepiling .pp-section:nth-child(3) {
+			background-image: url('media/img/clouds.jpg');
+			background-size: cover; 
+			background-position: center; 
+			background-repeat: no-repeat; 
+		}
+
+		/* Menu styling */
+		#menu {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+			padding: 10px;
+			z-index: 100;
+			opacity: 0;
+			transform: translateY(-20px);
+			transition: all 0.8s ease-out;
+		}
+
+		#menu li {
+			list-style: none;
+			opacity: 0;
+			transform: translateY(-10px);
+		}
+
+		#menu a {
+			color: white;
+			text-decoration: none;
+			padding: 8px 16px;
+			border-radius: 8px;
+			transition: background 0.3s;
+		}
+
+		#menu a:hover,
+		#menu .active a {
+			background: rgba(255, 255, 255, 0.2);
+		}
+
+		/* Loading animation */
+		.loaded #menu,
+		.loaded #menu li {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.loaded h1,
+		.loaded p {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		/* Animate menu items sequentially */
+		#menu li:nth-child(1) { transition: all 0.5s ease-out 0.4s; }
+		#menu li:nth-child(2) { transition: all 0.5s ease-out 0.6s; }
+		#menu li:nth-child(3) { transition: all 0.5s ease-out 0.8s; }
+		#menu li:nth-child(4) { transition: all 0.5s ease-out 1.0s; }
+
+		/* Background fade-in */
+		.pp-section {
+			animation: fadeIn 1.5s ease-out forwards;
+		}
+
+		@keyframes fadeIn {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+
+		/* Loading screen */
+		.loader {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #4ab3ec;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			z-index: 9999;
+			transition: opacity 0.8s ease-out;
+		}
+
+		.loader-content {
+			text-align: center;
+		}
+
+		.loader-spinner {
+			width: 50px;
+			height: 50px;
+			border: 5px solid rgba(255, 255, 255, 0.3);
+			border-radius: 50%;
+			border-top-color: #4cc9f0;
+			animation: spin 1s ease-in-out infinite;
+			margin: 0 auto 20px;
+		}
+
+		@keyframes spin {
+			to { transform: rotate(360deg); }
+		}
+
+		.loader-text {
+			color: white;
+			font-family: coolvetica;
+			font-size: 1.2em;
+		}
+	</style>
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$('#pagepiling').pagepiling({
-				menu: '#menu',
-				anchors: ['page1', 'page2', 'page3'],
-				loopTop: true,
-				loopBottom: true
-				
-			});
+			// Show loading screen first
+			setTimeout(function() {
+				$('.loader').fadeOut(800, function() {
+					$('body').addClass('loaded');
+					
+					// Initialize pagepiling after loading
+					$('#pagepiling').pagepiling({
+						menu: '#menu',
+						anchors: ['page1', 'page2', 'page3'],
+						loopTop: true,
+						loopBottom: true
+					});
+
+					// Animate menu items sequentially
+					$('#menu li').each(function(i) {
+						$(this).delay(100 * i).animate({
+							opacity: 1,
+							top: 0
+						}, 400);
+					});
+				});
+			}, 1500); // Show loader for 1.5 seconds
 		});
 	</script>
 </head>
 
 <body>
+	<!-- Loading screen -->
+	<div class="loader">
+		<div class="loader-content">
+			<div class="loader-spinner"></div>
+			<div class="loader-text">Loading Game Guide...</div>
+		</div>
+	</div>
 
 	<ul id="menu">
 		<li><a href="index.html">Return</a></li>
@@ -40,19 +231,16 @@
 	<div id="pagepiling">
 		<div class="section" id="section1">
 			<h1>How the Game Works</h1>
-            <p>In Clickfluencer, you have to tap on the phone to earn money and followers. The more you click, the more you earn! Use your earnings to unlock powerful upgrades and exclusive items in the <a href="#page2">Shop</a>, which will help you level up faster and gain more followers. Click your way to success!</p>
-
-
+			<p>In Clickfluencer, you have to tap on the phone to earn money and followers. The more you click, the more you earn! Use your earnings to unlock powerful upgrades and exclusive items in the <a href="#page2">Shop</a>, which will help you level up faster and gain more followers. Click your way to success!</p>
 		</div>
 		<div class="section" id="section2">
 			<h1>The In-Game Shop</h1>
-            <p>Use your hard-earned points to unlock exciting new music, cool click sounds, and unique cursor styles! Each item you unlock is automatically saved, so you can enjoy your customizations while playing and truly make the game your own.</p>
+			<p>Use your hard-earned points to unlock exciting new music, cool click sounds, and unique cursor styles! Each item you unlock is automatically saved, so you can enjoy your customizations while playing and truly make the game your own.</p>
 		</div>
 		<div class="section" id="section3">
 			<h1>Tips & Progress</h1>
-            <p>The more you play, the more you achieve in-game! Upgrades are key to boosting your progress. Have fun playing and keep unlocking new possibilities!</p>
+			<p>The more you play, the more you achieve in-game! Upgrades are key to boosting your progress. Have fun playing and keep unlocking new possibilities!</p>
 		</div>
 	</div>
-
 </body>
 </html>
