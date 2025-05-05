@@ -60,9 +60,7 @@ function playMusic(name) {
         if (button) button.textContent = "Select";
 
         switchMusic(name);
-    } else {
-        alert("Nicht genug Geld!");
-    }
+    } 
 }
 
 // Gekaufte Musik laden
@@ -121,9 +119,7 @@ function activateClickSound(name) {
         loadPurchasedClickSounds();
 
         selectClickSound(name);
-    } else {
-        alert("Nicht genug Geld!");
-    }
+    } 
 }
 
 function selectClickSound(name) {
@@ -209,9 +205,7 @@ function activateCursor(name) {
         loadPurchasedCursors();
 
         selectCursor(name);
-    } else {
-        alert("Nicht genug Geld!");
-    }
+    } 
 }
 
 function selectCursor(name) {

@@ -38,6 +38,8 @@ function teamUpgrade() {
 
         updateUI();
         saveGameState();
+
+        showNotification("Team-Upgrade aktiviert!");
     }
 }
 
@@ -64,7 +66,10 @@ function cameraUpgrade() {
 
         updateUI();
         saveGameState();
+        showNotification("Camera-Upgrade aktiviert!");
     }
+
+    
 }
 
 
@@ -78,7 +83,10 @@ function phoneUpgrade(){
 
         updateUI();
         saveGameState();
+        showNotification("Phone-Upgrade aktiviert!");
     }
+
+    
 }
 
 
@@ -93,7 +101,10 @@ function youtubeUpgrade() {
 
         updateUI();
         saveGameState();
+        showNotification("YouTube-Upgrade aktiviert!");
     }
+
+    
 }
 
 
@@ -109,5 +120,6 @@ function liveChat(){
         updateUI();
         saveGameState();
 
+        showNotification("LiveChat aktiviert!");
     }
 }

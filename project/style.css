@@ -207,6 +207,37 @@ body, html {
     z-index: 10;
 }
 
+/* Notification */
+.notification {
+    position: fixed;
+    font-family: coolvetica;
+    bottom: 16%;
+    left: 48.8%;
+    transform: translate(-50%, 20px);
+    background-color: rgba(40, 40, 40, 0.9);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 1000;
+    max-width: 40%;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.notification.show {
+    opacity: 0.7;
+    transform: translate(-50%, 0);
+}
+
+
+
+
 /* Chat */
 
 #chatContainer {

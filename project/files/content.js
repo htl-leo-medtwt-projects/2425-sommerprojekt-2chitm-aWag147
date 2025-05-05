@@ -175,3 +175,13 @@ function addLabelToContainer() {
     container.appendChild(muteMusic);
     container.appendChild(changeTrack);
 }
+
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2500); // Verschwindet nach 2,5 Sekunden
+}
