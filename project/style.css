@@ -529,8 +529,8 @@ p{
 #settings-box{
     border: rgba(255, 255, 255, 0.8) solid 0px;
     margin-top: 3%;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 30%;
+    margin-right: 30%;
     padding: 18%;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
@@ -544,14 +544,7 @@ p{
     text-shadow: 10px 20px 15px rgba(77, 77, 77, 0.139);
 }
 
-#settings-box p{
-    position: absolute;
-    top: 23%;
-    left: 28%;
-    font-size: 25px;
-    font-weight: 50;
-    color: rgba(0, 0, 0, 0.88);
-}
+
 
 #muteButton{
     background: rgba(211, 211, 211, 0.806);
@@ -567,11 +560,11 @@ p{
     cursor: pointer;
     transition: transform 0.3s ease-in-out, background-color 0.3s;
     position: absolute;
-    left: 27%;
+    left: 35%;
     bottom: 33%;
 }
 
-#changeTrackButton{
+#muteClicks{
     background: rgba(211, 211, 211, 0.806);
     color: black;
     border: none;
@@ -585,11 +578,11 @@ p{
     cursor: pointer;
     transition: transform 0.3s ease-in-out, background-color 0.5s;
     position: absolute;
-    left: 27%;
-    bottom: 23%;
+    left: 35%;
+    bottom: 25%;
 }
 
-#changeTrackButton:hover{
+#muteClicks:hover{
     transform: translateX(+3%);
     color: #2d8bf0d0;
 }
@@ -606,7 +599,7 @@ p{
     width: 15%;
     height: 47%;
     top: 24%;
-    right: 28%;
+    right: 34%;
     --input-focus: #2d8cf0;
     --font-color: #323232;
     --font-color-sub: #666;

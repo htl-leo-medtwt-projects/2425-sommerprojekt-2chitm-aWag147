@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { name: "star", price: "1Mio" },
             { name: "diamond", price: "10Mio" }
         ],
-        ClickSounds: [ // Neue Kategorie mit lustigen Click-Sounds
+        ClickSounds: [ 
             { name: "popcorn-click", price: "10k" },
             { name: "rubber-duck", price: "50k" },
             { name: "boing", price: "100k" },
@@ -124,24 +124,15 @@ document.addEventListener("DOMContentLoaded", function () {
 function addLabelToContainer() {
     let container = document.getElementById("settings-box");
 
-    if (document.getElementById("dynamic-slider")) return;
-
-    // Anzeige für Playtime, Geld und Follower
-    let statsDisplay = document.createElement("p");
-    statsDisplay.id = "stats-display";
-    statsDisplay.innerText = "Spielzeit: 120h \n Geld: 500.000$ \n Follower: 1.200.000";
-    statsDisplay.style.marginTop = "10px";
-    statsDisplay.style.fontWeight = "bold";
-
     let muteMusic = document.createElement("button");
     muteMusic.id = "muteButton";
     muteMusic.innerText = "Mute Music";
     muteMusic.onclick = toggleMusic;
 
-    let changeTrack = document.createElement("button");
-    changeTrack.id = "changeTrackButton";
-    changeTrack.innerText = "Change Track";
-
+    let muteClicks = document.createElement("button");
+    muteClicks.id = "muteClicks";
+    muteClicks.innerText = "Mute Clicks";
+    muteClicks.onclick = toggleClicks;
 
     function toggleMusic() {
         if (muteMusic.innerText === "Mute Music") {
@@ -150,6 +141,16 @@ function addLabelToContainer() {
         } else {
             muteMusic.innerText = "Mute Music";
             currentMusic.volume = 0.3;
+        }
+    }
+
+    function toggleClicks() {
+        if (muteClicks.innerText === "Mute Clicks") {
+            muteClicks.innerText = "Play Clicks";
+            clickVolume = 0;
+        } else {
+            muteClicks.innerText = "Mute Clicks";
+            clickVolume = 0.4;
         }
     }
 
@@ -170,10 +171,10 @@ function addLabelToContainer() {
         <button class="button-confirm">Lets go →</button>
     `;
 
-    container.appendChild(statsDisplay);
+    
     container.appendChild(form);
     container.appendChild(muteMusic);
-    container.appendChild(changeTrack);
+    container.appendChild(muteClicks);
 }
 
 function showNotification(message) {

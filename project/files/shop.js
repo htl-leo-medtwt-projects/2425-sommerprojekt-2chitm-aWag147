@@ -6,7 +6,7 @@ let currentMusic = null;
 //ClickSound
 let boughtClickSounds = JSON.parse(localStorage.getItem('boughtClickSounds')) || {};
 let currentClickSound = null;
-
+let clickVolume = 0.4;
 
 // KI für formatMoneyString(), updateMoneyUI
 function formatMoneyString(str) {
@@ -150,38 +150,14 @@ const contentClickSoundPrices = {
     "stop-the-cap": "10Mio" 
 };
 
-//Laden von Musik und Sounds
-document.addEventListener('DOMContentLoaded', function() {
-    loadPurchasedMusic();  // Lade gekaufte Musikstücke beim Start
 
-    // Lade die zuletzt abgespielte Musik und spiele sie ab, wenn vorhanden
-    const savedMusic = localStorage.getItem('currentMusic');
-    if (savedMusic && boughtMusic[savedMusic]) {
-        switchMusic(savedMusic);
-    }
-
-    loadPurchasedClickSounds();
-
-    const savedClick = localStorage.getItem('currentClickSound');
-    if (savedClick && boughtClickSounds[savedClick]) {
-        selectClickSound(savedClick);
-    }
-
-    loadPurchasedCursors();
-
-    const savedCursor = localStorage.getItem('currentCursor');
-    if (savedCursor && boughtCursors[savedCursor]) {
-        selectCursor(savedCursor);
-    }
-
-});
 
 
 //Per Klick Sound abspielen
 document.addEventListener('click', () => {
     if (currentClickSound) {
-        const sound = new Audio(currentClickSound.src); // Damit es mehrfach schnell abspielbar ist
-        sound.volume = 0.4;
+        let sound = new Audio(currentClickSound.src);
+        sound.volume = clickVolume;
         sound.play();
     }
 });
@@ -248,3 +224,30 @@ const cursorPrices = {
     "star": "1Mio",
     "diamond": "10Mio"
 };
+
+
+//Laden von Musik und Sounds
+document.addEventListener('DOMContentLoaded', function() {
+    loadPurchasedMusic();  // Lade gekaufte Musikstücke beim Start
+
+    // Lade die zuletzt abgespielte Musik und spiele sie ab, wenn vorhanden
+    const savedMusic = localStorage.getItem('currentMusic');
+    if (savedMusic && boughtMusic[savedMusic]) {
+        switchMusic(savedMusic);
+    }
+
+    loadPurchasedClickSounds();
+
+    const savedClick = localStorage.getItem('currentClickSound');
+    if (savedClick && boughtClickSounds[savedClick]) {
+        selectClickSound(savedClick);
+    }
+
+    loadPurchasedCursors();
+
+    const savedCursor = localStorage.getItem('currentCursor');
+    if (savedCursor && boughtCursors[savedCursor]) {
+        selectCursor(savedCursor);
+    }
+
+});
