@@ -133,7 +133,7 @@ body, html {
     transform: scale(1.01);
 }
   
-#follower-counter, #money-counter {
+#follower-counter, #money-counter, #autoClicksDisplay, #clicksPerClickDisplay {
     position: absolute;
     font-family: coolvetica;
     font-size: 24px;
@@ -143,14 +143,14 @@ body, html {
 }
 
 #follower-counter {
-    top: 20px;
-    left: 20px;
+    top: 2%;
+    left: 2%;
     transition: all 0.2s ease;
 }
 
 #money-counter {
-    top: 20px;
-    right: 20px;
+    top: 2%;
+    right: 2%;
     transition: all 0.2s ease;
 }
 
@@ -237,9 +237,6 @@ body, html {
     transform: translate(-50%, 0);
 }
 
-
-
-
 /* Chat */
 
 #chatContainer {
@@ -302,6 +299,22 @@ body, html {
     z-index: 1;
     position: absolute;
     top: 1.5%;
+}
+
+/* Per Second */
+#autoClicksDisplay{
+    font-family: coolvetica;
+    position: absolute;
+    top: 2.2%;
+    left: 10%;
+    
+}
+
+#clicksPerClickDisplay{
+    font-family: coolvetica;
+    position: absolute;
+    top: 2.2%;
+    right: 10%;
 }
 
 /* Container 3 */

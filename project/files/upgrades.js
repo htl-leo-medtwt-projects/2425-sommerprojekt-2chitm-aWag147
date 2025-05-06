@@ -35,6 +35,7 @@ function teamUpgrade() {
 
         upgradeCostTeam *= 2;
         incomePerSecond *= 2;
+        autoClicksPerSecond = incomePerSecond;
 
         updateUI();
         saveGameState();
@@ -62,6 +63,7 @@ function cameraUpgrade() {
         money -= upgradeCostCamera;
         
         clicks *= 2;
+        clicksPerClick = clicks;
         upgradeCostCamera *= 3;
 
         updateUI();
@@ -79,6 +81,7 @@ function phoneUpgrade(){
         money -= upgradeCostPhone;
 
         clicks *= 5;
+        clicksPerClick = clicks;
         upgradeCostPhone *= 3;
 
         updateUI();
@@ -96,7 +99,7 @@ function youtubeUpgrade() {
         money -= upgradeCostYoutube;
 
         incomePerSecond *= 10;
-
+        autoClicksPerSecond = incomePerSecond;
         upgradeCostYoutube *= 2;
 
         updateUI();

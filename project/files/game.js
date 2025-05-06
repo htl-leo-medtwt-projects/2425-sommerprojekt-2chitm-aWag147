@@ -10,6 +10,8 @@ const multiplier = 1.4;
 const clickMoneyElement = document.getElementById("money-counter");
 const clickFollowerElement = document.getElementById("follower-counter");
 
+let autoClicksPerSecond = 0;
+let clicksPerClick = 1;
 
 
 
@@ -35,6 +37,9 @@ function saveGameState() {
     localStorage.setItem('upgradeCostPhone', upgradeCostPhone);
     localStorage.setItem('upgradeCostYoutube', upgradeCostYoutube);
     localStorage.setItem('liveIsOn', liveIsOn);
+    localStorage.setItem('autoClicksPerSecond', autoClicksPerSecond);
+    localStorage.setItem('clicksPerClick', clicksPerClick);
+
 }
 
 // Laden des Spielstands
@@ -58,6 +63,8 @@ function loadGameState() {
         document.getElementById('chatContainer').style.display = 'block';
         document.getElementById('livechat').style.display = 'none';
     }
+    const savedAutoClicksPerSecond = parseFloat(localStorage.getItem('autoClicksPerSecond'));
+    const savedClicksPerClick = parseFloat(localStorage.getItem('clicksPerClick'));
 
 
     //KI Hilfe für isNan
@@ -72,6 +79,8 @@ function loadGameState() {
     if (!isNaN(savedUpgradeCostCamera)) upgradeCostCamera = savedUpgradeCostCamera;
     if (!isNaN(savedUpgradeCostPhone)) upgradeCostPhone = savedUpgradeCostPhone;
     if (!isNaN(savedUpgradeCostYoutube)) upgradeCostYoutube = savedUpgradeCostYoutube;
+    if (!isNaN(savedAutoClicksPerSecond)) autoClicksPerSecond = savedAutoClicksPerSecond;
+    if (!isNaN(savedClicksPerClick)) clicksPerClick = savedClicksPerClick;
 
     teamUpgradeActive = savedTeamUpgradeActive === "true";
     loadUpgradeTeam();
@@ -121,6 +130,8 @@ function updateUI() {
     document.getElementById("money").textContent = formatNumberFixed(money);
     document.getElementById("followers").textContent = formatNumberFixed(followers);
     document.getElementById("money-shop").textContent = formatNumberFixed(money);
+    document.getElementById("autoClicksDisplay").textContent = `Auto-Clicks/sec: ${autoClicksPerSecond}`;
+    document.getElementById("clicksPerClickDisplay").textContent = `Clicks per Click: ${clicksPerClick}`;
 
 }
 
