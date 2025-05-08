@@ -86,11 +86,30 @@ function loadGameState() {
     loadUpgradeTeam();
 }
 
+function showSnowEffect() {
+    const snowOverlay = document.querySelector('.snow-overlay');
+
+    // Stoppe ggf. vorherigen Timeout (falls schnell geklickt wird)
+    if (snowOverlay._timeoutId) {
+        clearTimeout(snowOverlay._timeoutId);
+    }
+
+    // Zeige den Effekt
+    snowOverlay.style.display = 'block';
+
+    // Verstecke ihn nach 2 Sekunden
+    snowOverlay._timeoutId = setTimeout(() => {
+        snowOverlay.style.display = 'none';
+    }, 2000);
+}
+
 // Klicker Logik
 function clickPhone() {
     enlarge(document.getElementById('phone'));
     money += clicks;
     clickCount++;
+
+    showSnowEffect();
 
     if (clickCount % 5 === 0) {
         followers += clicks;
@@ -130,8 +149,8 @@ function updateUI() {
     document.getElementById("money").textContent = formatNumberFixed(money);
     document.getElementById("followers").textContent = formatNumberFixed(followers);
     document.getElementById("money-shop").textContent = formatNumberFixed(money);
-    document.getElementById("autoClicksDisplay").textContent = `Auto-Clicks/sec: ${autoClicksPerSecond}`;
-    document.getElementById("clicksPerClickDisplay").textContent = `Clicks per Click: ${clicksPerClick}`;
+    document.getElementById("autoClicksDisplay").textContent = `Clicks/Sec: ${autoClicksPerSecond}`;
+    document.getElementById("clicksPerClickDisplay").textContent = `Clicks/Click: ${clicksPerClick}`;
 
 }
 
