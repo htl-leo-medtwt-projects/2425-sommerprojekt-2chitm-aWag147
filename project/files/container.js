@@ -26,8 +26,6 @@ document.addEventListener('keydown', function(event) {
     
 });
 
-
-
 //Musik spielen bei seiten-reload
 window.addEventListener("load", () => {
     const savedMusic = localStorage.getItem("currentMusic");
@@ -40,8 +38,6 @@ window.addEventListener("load", () => {
 function shop() {
     container3.classList.add("slide-up");
     container3.classList.remove("slide-down");
-    switchCategory("music");
-
     document.getElementById("money-counter-shop").innerHTML = `💰 ${money.toFixed(2)}`;
 }
 
