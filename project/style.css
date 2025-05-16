@@ -69,14 +69,13 @@ body, html {
     text-align: center;
 }
 
-#start-h1 {
-    font-family: copyduck;
-    font-size: 600%;
-    opacity: 0.92;
-    text-shadow: 10px 20px 15px rgb(77, 77, 77);
+#start-img {
+    width: 85%;
+    opacity: 1;
     animation: start-h1 5s infinite none;
     color: rgb(243, 243, 243);
     margin: 0;
+    z-index: 2;
 }
 
 #start-p {
@@ -85,26 +84,70 @@ body, html {
     opacity: 0; 
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
     animation: start-p 1s ease-in-out 2s forwards; 
-    margin-top: 20px;
 }
 
 #infoImg{
-    width: 3%;
+    width: 4.5%;
     position: absolute;
-    top: 2%;
-    right: 1%;
+    top: 1%;
+    right: 0%;
     transition: all 0.5s;
-    opacity: 0.9;
-    text-shadow: 10px 20px 15px rgb(77, 77, 77);
-
+    z-index: 3;
 }
 
 #infoImg:hover{
     transform: scale(1.1);
-    opacity: 1;
+   
 }
 
+#cloud1{
+    position: absolute;
+    left: -19%;
+    top: 2%;
+    width: 30%;
+    opacity: 0.9;
+    animation: start-h1 5s infinite none;
+}
 
+#cloud2{
+    position: absolute;
+    right: -14%;
+    top: -16%;
+    width: 30%;
+    opacity: 0.9;
+    z-index: 1;
+    animation: start-h1 5s infinite none;
+}
+
+#cloud3{
+    position: absolute;
+    right: 40%;
+    top: -34%;
+    width: 30%;
+    opacity: 0.9;
+    z-index: 1;
+    animation: start-h1 5s infinite none;
+}
+
+#cloud4{
+    position: absolute;
+    left: -6%;
+    bottom: -25%;
+    width: 30%;
+    opacity: 0.9;
+    z-index: 1;
+    animation: start-h1 5s infinite none;
+}
+
+#cloud5{
+    position: absolute;
+    right: -5%;
+    bottom: -25%;
+    width: 30%;
+    opacity: 0.9;
+    z-index: 1;
+    animation: start-h1 5s infinite none;
+}
 
 /* Container 2 */
 
@@ -155,6 +198,7 @@ body, html {
     font-weight: bold;
     color: white;
     text-shadow: 2px 2px 5px black;
+    z-index: 3;
 }
 
 #follower-counter {
@@ -267,6 +311,7 @@ body, html {
     scroll-behavior: smooth;
     scrollbar-width: none; /* aber nicht sichtbar */
     display: none;
+    z-index: 3;
 }
 
 
