@@ -84,6 +84,7 @@ body, html {
     opacity: 0; 
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
     animation: start-p 1s ease-in-out 2s forwards; 
+    padding-top: 5%;
 }
 
 #infoImg{
@@ -346,7 +347,8 @@ body, html {
 #myBar {
     height: 100%;
     width: 0%;
-    background-color: rgba(47, 146, 227, 0.852);
+    background: #FE95F6;
+background: linear-gradient(350deg, rgba(254, 149, 246, 1) 0%, rgba(45, 156, 196, 1) 100%);
     transition: width 0.3s ease-in-out;
     text-align: left;
     padding-left: 10px;
