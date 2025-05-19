@@ -348,7 +348,7 @@ body, html {
     height: 100%;
     width: 0%;
     background: #FE95F6;
-background: linear-gradient(350deg, rgba(254, 149, 246, 1) 0%, rgba(45, 156, 196, 1) 100%);
+    background: linear-gradient(350deg, rgba(254, 149, 246, 1) 0%, rgba(45, 156, 196, 1) 100%);
     transition: width 0.3s ease-in-out;
     text-align: left;
     padding-left: 10px;
