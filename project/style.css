@@ -133,7 +133,7 @@ body, html {
 #cloud4{
     position: absolute;
     left: -6%;
-    bottom: -25%;
+    bottom: -40%;
     width: 30%;
     opacity: 0.9;
     z-index: 1;
@@ -377,6 +377,57 @@ body, html {
     position: absolute;
     top: 2.3%;
     right: 16%;
+}
+
+#upgradeProfile {
+    position: absolute;
+    bottom: 45%;
+    right: 2.5%;
+    border-radius: 15px;
+    width: 100%;
+    height: 25%;
+    background: #e0e0e0ca;
+    padding: 15px;
+    border-top-right-radius: 10px;
+    color: black;
+    font-family: coolvetica;
+    font-size: 16px;
+    z-index: 3;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+#upgradeProfile h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    text-align: center;
+}
+
+#upgradeList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#upgradeList li {
+    margin-bottom: 4px;
+}
+
+.highlight {
+  animation: highlightGlow 1s ease forwards;
+}
+
+@keyframes highlightGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(254, 149, 246, 0);
+  }
+  50% {
+    box-shadow: 0 0 10px 3px rgba(254, 149, 246, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(254, 149, 246, 0);
+  }
 }
 
 /* Container 3 */
