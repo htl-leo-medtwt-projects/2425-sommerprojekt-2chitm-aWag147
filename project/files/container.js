@@ -60,4 +60,41 @@ function settingsBack(){
     container4.classList.remove("slide-up");
 }
 
+// Responsive Alert
+function checkIfMobileOrSmallScreen() {
+    const mobileWarning = document.getElementById("mobile-warning");
+    const isMobileDevice = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isSmallScreen = window.innerWidth < 1000;
+
+    if (isMobileDevice || isSmallScreen) {
+        mobileWarning.style.display = "flex";
+        document.body.style.overflow = "hidden"; 
+        blockInput(true);
+    } else {
+        mobileWarning.style.display = "none";
+        document.body.style.overflow = "";
+        blockInput(false);
+    }
+}
+
+function blockInput(shouldBlock) {
+    if (shouldBlock) {
+        window.addEventListener("keydown", preventAllKeys, true);
+        window.addEventListener("keypress", preventAllKeys, true);
+        window.addEventListener("keyup", preventAllKeys, true);
+    } else {
+        window.removeEventListener("keydown", preventAllKeys, true);
+        window.removeEventListener("keypress", preventAllKeys, true);
+        window.removeEventListener("keyup", preventAllKeys, true);
+    }
+}
+
+function preventAllKeys(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+}
+
+window.addEventListener("load", checkIfMobileOrSmallScreen);
+window.addEventListener("resize", checkIfMobileOrSmallScreen);
 
