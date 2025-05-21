@@ -379,6 +379,7 @@ body, html {
     right: 16%;
 }
 
+/* Upgradeprofil */
 #upgradeProfile {
     position: absolute;
     bottom: 45%;
@@ -415,20 +416,24 @@ body, html {
 }
 
 .highlight {
-  animation: highlightGlow 1s ease forwards;
+  animation: highlightGlow 2s ease forwards;
 }
 
 @keyframes highlightGlow {
   0% {
     box-shadow: 0 0 0 0 rgba(254, 149, 246, 0);
   }
-  50% {
-    box-shadow: 0 0 10px 3px rgba(254, 149, 246, 0.8);
+  30% {
+    box-shadow: 0 0 10px 3px rgb(221, 115, 212);
+  }
+  70% {
+    box-shadow: 0 0 10px 3px rgb(221, 115, 212);
   }
   100% {
     box-shadow: 0 0 0 0 rgba(254, 149, 246, 0);
   }
 }
+
 
 /* Container 3 */
 
@@ -759,8 +764,6 @@ p{
     outline: none;
 }
 
- 
-  
 .input::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
@@ -791,7 +794,6 @@ p{
     
 }
 
-
   
 .icon {
     width: 24px;
@@ -818,14 +820,3 @@ p{
     cursor: pointer;
 }
   
-
-
-    
-  /* Shop */
-  /* Themes */
-
-
-  .music-button.bought {
-    background-color: #4caf50; /* Grün oder was du willst */
-    color: white;
-}
