@@ -708,13 +708,13 @@ p{
 }
 
 #settings-box:hover {
-    box-shadow: 0 12px 40px rgba(45, 156, 196, 0.22), 0 4px 16px rgba(0,0,0,0.13);
+    box-shadow: 10px 20px 15px rgba(127, 75, 123, 0.5);
 }
 
 .stats-box h3 {
     text-align: center;
     margin-bottom: 22px;
-    color: #2d8cf0;
+    color: black;
     font-size: 28px;
     letter-spacing: 1px;
     text-shadow: 0 2px 8px #e0eaff;
