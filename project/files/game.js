@@ -151,7 +151,7 @@ function updateUI() {
     document.getElementById("money-shop").textContent = formatNumberFixed(money);
     document.getElementById("autoClicksDisplay").textContent = `Clicks/Sec: ${autoClicksPerSecond}`;
     document.getElementById("clicksPerClickDisplay").textContent = `Clicks/Click: ${clicksPerClick}`;
-
+     updateStatsBox();
 }
 
 // Klick Effekt

@@ -680,8 +680,8 @@ p{
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     box-shadow: 10px 7px 15px rgb(77, 77, 77);   
+    transition: box-shadow 0.5s;
 }
-
 
 #settings-box{
     font-family: coolvetica;
@@ -689,161 +689,60 @@ p{
     text-shadow: 10px 20px 15px rgba(77, 77, 77, 0.139);
 }
 
-
-
-#muteButton{
-    background: rgba(211, 211, 211, 0.806);
-    color: black;
-    border: none;
-    padding: 15px 25px;
-    font-size: 16px;
+/* Stats */
+.stats-box {
+    border-radius: 25px;
+    padding: 40px 50px 30px 50px;
+    margin: 40px auto 30px auto;
     font-family: coolvetica;
-    font-weight: bold;
-    border-radius: 15px;
-    border: solid 2px black;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, background-color 0.3s;
-    position: absolute;
-    left: 35%;
-    bottom: 33%;
-}
-
-#muteClicks{
-    background: rgba(211, 211, 211, 0.806);
-    color: black;
-    border: none;
-    padding: 15px 25px;
-    font-size: 16px;
-    font-family: coolvetica;
-    font-weight: bold;
-    border: solid 2px black;
-    border-radius: 15px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out, background-color 0.5s;
-    position: absolute;
-    left: 35%;
-    bottom: 25%;
-}
-
-#muteClicks:hover{
-    transform: translateX(+3%);
-    color: #2d8bf0d0;
-}
-
-#muteButton:hover{
-    transform: translateX(+3%);
-    color: #2d8bf0d9;
-}
-
-  /* Sign in from uiverse website */
-
-.form {
-    position: absolute;
-    width: 15%;
-    height: 47%;
-    top: 24%;
-    right: 34%;
-    --input-focus: #2d8cf0;
-    --font-color: #323232;
-    --font-color-sub: #666;
-    --bg-color: #fff;
-    --main-color: #323232;
-    padding: 20px;
-    background: lightgrey;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    gap: 20px;
-    border-radius: 15px;
-    border: 2px solid var(--main-color);
-    box-shadow: 4px 4px var(--main-color);
-    box-shadow: 10px 7px 15px rgba(77, 77, 77, 0.309);   
-    opacity: 95%;
-}
-  
-.title {
-    color: rgb(65, 143, 211);
-    font-weight: 900;
     font-size: 20px;
-    margin-bottom: 25px;
-}
-  
-.title span {
-    color: var(--font-color-sub);
-    font-weight: 600;
-    font-size: 17px;
-}
-  
-.input {
-    width: 80%;
-    height: 40px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--font-color);
-    padding: 5px 10px;
-    outline: none;
+    color: #1a1a1a;
+    width: 100%;
+    max-width: 450px;
+    min-width: 200px;
+    text-align: left;
+    position: absolute;
+    top: 12%;
+    left: 34%;
+    transition: box-shadow 0.3s;
 }
 
-.input::placeholder {
-    color: var(--font-color-sub);
-    opacity: 0.8;
-}
-  
-.input:focus {
-    border: 2px solid var(--input-focus);
-}
-  
-.login-with {
-    display: flex;
-    gap: 20px;
-}
-  
-.button-log {
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    color:#2d8cf0;
-    font-size: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+#settings-box:hover {
+    box-shadow: 0 12px 40px rgba(45, 156, 196, 0.22), 0 4px 16px rgba(0,0,0,0.13);
 }
 
-  
-.icon {
-    width: 24px;
-    height: 24px;
-    fill: var(--main-color);
-}
-  
-.button-log:active, .button-confirm:active {
-    box-shadow: 0px 0px var(--main-color);
-    transform: translate(3px, 3px);
-}
-  
-.button-confirm {
-    margin: 50px auto 0 auto;
-    width: 120px;
-    height: 60px;
-    border-radius: 5px;
-    border: 2px solid var(--main-color);
-    background-color: var(--bg-color);
-    box-shadow: 4px 4px var(--main-color);
-    font-size: 17px;
-    font-weight: 600;
+.stats-box h3 {
+    text-align: center;
+    margin-bottom: 22px;
     color: #2d8cf0;
-    cursor: pointer;
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #e0eaff;
 }
-  
+
+.stats-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.stats-box li {
+    margin-bottom: 14px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(45,156,196,0.07);
+    border-radius: 8px;
+    padding: 8px 14px;
+    box-shadow: 0 1px 4px rgba(45,156,196,0.04);
+}
+
+.stats-box li span {
+    font-weight: bold;
+    color: #2d8cf0;
+    margin-left: auto;
+}
+
+
+

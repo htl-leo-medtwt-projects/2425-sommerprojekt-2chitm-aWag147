@@ -2,7 +2,6 @@
 let boughtMusic = JSON.parse(localStorage.getItem('boughtMusic')) || {};  // Laden aus localStorage oder leeres Objekt, mit KI
 let currentMusic = null;
 
-
 //ClickSound
 let boughtClickSounds = JSON.parse(localStorage.getItem('boughtClickSounds')) || {};
 let currentClickSound = null;
@@ -49,7 +48,6 @@ function playMusic(name) {
 
     const price = formatMoneyString(button.dataset.price);
     
-
     if (boughtMusic[name]) {
         switchMusic(name);
         return;
@@ -60,13 +58,11 @@ function playMusic(name) {
         return;
     }
 
-    // If player can afford the item
     money -= price;
     localStorage.setItem('money', money);
     boughtMusic[name] = true;
     localStorage.setItem('boughtMusic', JSON.stringify(boughtMusic));
     updateMoneyUI();
-
 
     button.textContent = "Select";
     button.dataset.bought = 'true';
@@ -184,8 +180,6 @@ function loadPurchasedClickSounds() {
     });
 }
 
-
-
 const contentClickSoundPrices = {
     "popcorn-click": "10k",
     "rubber-duck": "50k",
@@ -194,9 +188,6 @@ const contentClickSoundPrices = {
     "meme-wow": "5Mio",
     "stop-the-cap": "10Mio" 
 };
-
-
-
 
 //Per Klick Sound abspielen
 document.addEventListener('click', () => {
@@ -209,7 +200,6 @@ document.addEventListener('click', () => {
 
 
 //Cursors
-
 function activateCursor(name) {
     const button = document.querySelector(`.cursor-button[data-name="${name}"]`);
     if (!button) return;
