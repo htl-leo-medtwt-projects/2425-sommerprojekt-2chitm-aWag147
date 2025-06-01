@@ -26,50 +26,74 @@ function formatMoneyString(str) {
 }
 
 function updateMoneyUI() {
+    // Update both money displays
     const moneyElements = document.querySelectorAll("#money, #money-shop");
     moneyElements.forEach(el => {
-        el.textContent = (money >= 1_000_000)
+        const formattedMoney = (money >= 1_000_000)
             ? (money / 1_000_000).toFixed(2) + "Mio"
             : (money >= 1_000)
                 ? (money / 1000).toFixed(2) + "k"
                 : money.toFixed(2);
+        el.textContent = formattedMoney;
     });
+    
+    // Save money to localStorage
+    localStorage.setItem('money', money);
 }
 
 //Musik
 
 function playMusic(name) {
-    const musicPrice = contentMusicPrices[name];
+    const button = document.querySelector(`.music-button[data-name="${name}"]`);
+    if (!button) return;
 
-    if (!musicPrice) return;
+    const price = formatMoneyString(button.dataset.price);
+    
 
     if (boughtMusic[name]) {
         switchMusic(name);
         return;
     }
 
-    const price = formatMoneyString(musicPrice);
+    if (money < price) {
+        showNotification('Not enough money!');
+        return;
+    }
 
-    if (money >= price) {
-        money -= price;
-        boughtMusic[name] = true;
-        localStorage.setItem('boughtMusic', JSON.stringify(boughtMusic));  // Speichern im LocalStorage, JSON.tringify(boughtMusic)) mit KI
-        updateMoneyUI();
+    // If player can afford the item
+    money -= price;
+    localStorage.setItem('money', money);
+    boughtMusic[name] = true;
+    localStorage.setItem('boughtMusic', JSON.stringify(boughtMusic));
+    updateMoneyUI();
 
-        const button = document.querySelector(`.music-button[data-name="${name}"]`);
-        if (button) button.textContent = "Select";
 
-        switchMusic(name);
-    } 
+    button.textContent = "Select";
+    button.dataset.bought = 'true';
+    button.style.cursor = 'pointer';
+
+    switchMusic(name);
 }
 
 // Gekaufte Musik laden
 function loadPurchasedMusic() {
     const musicButtons = document.querySelectorAll('.music-button');
     musicButtons.forEach(button => {
-        const musicName = button.getAttribute('data-name');
+        const musicName = button.dataset.name;
+        const price = formatMoneyString(button.dataset.price);
+        
         if (boughtMusic[musicName]) {
             button.textContent = 'Select';
+            button.dataset.bought = 'true';
+            button.style.cursor = 'pointer';
+        } else {
+            button.textContent = `$ ${button.dataset.price}`;
+            button.removeAttribute('data-bought');
+            if (money < price) {
+                button.style.cursor = 'not-allowed';
+            } else {
+                button.style.cursor = 'pointer';
+            }
         }
     });
 }
@@ -101,25 +125,34 @@ const contentMusicPrices = {
 //Klick Sound
 
 function activateClickSound(name) {
-    const clickSoundPrice = contentClickSoundPrices[name];
-    if (!clickSoundPrice) return;
+    const button = document.querySelector(`.clicksounds-button[data-name="${name}"]`);
+    if (!button) return;
 
+    const price = formatMoneyString(button.dataset.price);
+    
+   
     if (boughtClickSounds[name]) {
         selectClickSound(name);
         return;
     }
 
-    const price = formatMoneyString(clickSoundPrice);
-    if (money >= price) {
-        money -= price;
-        boughtClickSounds[name] = true;
-        localStorage.setItem('boughtClickSounds', JSON.stringify(boughtClickSounds));
-        updateMoneyUI();
 
-        loadPurchasedClickSounds();
+    if (money < price) {
+       
+        showNotification('Not enough money!');
+        return;
+    }
 
-        selectClickSound(name);
-    } 
+    money -= price;
+    localStorage.setItem('money', money);
+    boughtClickSounds[name] = true;
+    localStorage.setItem('boughtClickSounds', JSON.stringify(boughtClickSounds));
+    updateMoneyUI();
+
+    button.textContent = "Select";
+    button.dataset.bought = 'true';
+
+    selectClickSound(name);
 }
 
 function selectClickSound(name) {
@@ -128,13 +161,25 @@ function selectClickSound(name) {
 }
 
 function loadPurchasedClickSounds() {
-    const clickButtons = document.querySelectorAll('.clicksounds-section .buy-button');  
-    const savedClick = localStorage.getItem('currentClickSound'); // aktuelle Auswahl
-
+    const clickButtons = document.querySelectorAll('.clicksounds-button');  
     clickButtons.forEach(button => {
-        const soundName = button.getAttribute('data-name');
+        const soundName = button.dataset.name;
+        const price = formatMoneyString(button.dataset.price);
+        
         if (boughtClickSounds[soundName]) {
-            button.textContent = (soundName === savedClick) ? 'Selected' : 'Select';
+            button.textContent = 'Select';
+            button.dataset.bought = 'true';
+      
+            button.style.cursor = 'pointer';
+        } else {
+            button.textContent = `$ ${button.dataset.price}`;
+            button.removeAttribute('data-bought');
+       
+            if (money < price) {
+                button.style.cursor = 'not-allowed';
+            } else {
+                button.style.cursor = 'pointer';
+            }
         }
     });
 }
@@ -166,22 +211,32 @@ document.addEventListener('click', () => {
 //Cursors
 
 function activateCursor(name) {
-    const cursorPrice = formatMoneyString(cursorPrices[name]);
+    const button = document.querySelector(`.cursor-button[data-name="${name}"]`);
+    if (!button) return;
+
+    const price = formatMoneyString(button.dataset.price);
+
     if (boughtCursors[name]) {
         selectCursor(name);
         return;
     }
 
-    if (money >= cursorPrice) {
-        money -= cursorPrice;
-        boughtCursors[name] = true;
-        localStorage.setItem('boughtCursors', JSON.stringify(boughtCursors));
-        updateMoneyUI();
+    if (money < price) {
+        button.style.cursor = 'not-allowed';
+        setTimeout(() => button.style.cursor = '', 1000);
+        return;
+    }
 
-        loadPurchasedCursors();
+    money -= price;
+    localStorage.setItem('money', money);
+    boughtCursors[name] = true;
+    localStorage.setItem('boughtCursors', JSON.stringify(boughtCursors));
+    updateMoneyUI();
 
-        selectCursor(name);
-    } 
+
+    button.textContent = "Select";
+
+    selectCursor(name);
 }
 
 function selectCursor(name) {
@@ -201,13 +256,23 @@ function selectCursor(name) {
 }
 
 function loadPurchasedCursors() {
-    const cursorButtons = document.querySelectorAll('.cursor-section .buy-button');
-    const savedCursor = localStorage.getItem('currentCursor'); // aktuelle Auswahl
-
+    const cursorButtons = document.querySelectorAll('.cursor-button');
     cursorButtons.forEach(button => {
         const name = button.dataset.name;
+        const price = formatMoneyString(button.dataset.price);
+        
         if (boughtCursors[name]) {
-            button.textContent = (name === savedCursor) ? 'Selected' : 'Select';
+            button.textContent = 'Select';
+            button.dataset.bought = 'true';
+            button.style.cursor = 'pointer';
+        } else {
+            button.textContent = `$ ${button.dataset.price}`;
+            button.removeAttribute('data-bought');
+            if (money < price) {
+                button.style.cursor = 'not-allowed';
+            } else {
+                button.style.cursor = 'pointer';
+            }
         }
     });
 }

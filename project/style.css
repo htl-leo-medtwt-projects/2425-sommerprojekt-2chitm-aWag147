@@ -526,6 +526,10 @@ p{
     background-color: lightgray;
 }
 
+/* Cursor for unaffordable items with AI*/
+.buy-button[data-price]:not([data-bought]):hover {
+    cursor: not-allowed;
+}
 
 .grid-container {
     display: grid;

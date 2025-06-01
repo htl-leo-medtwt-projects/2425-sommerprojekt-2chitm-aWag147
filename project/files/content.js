@@ -36,19 +36,27 @@ document.addEventListener("DOMContentLoaded", function () {
             buyButton.classList.add("buy-button");
             buyButton.style.textAlign = "center";
             buyButton.style.whiteSpace = "pre-line";
+            buyButton.dataset.name = name;
+            buyButton.dataset.price = price; 
+            buyButton.dataset.category = category.toLowerCase(); 
 
-            //  Event-Listener für Kauf-Buttons, je nach Kategorie unterschiedlich
+            // Add category-specific classes
             if (category === "Music") {
                 buyButton.classList.add("music-button");
-                buyButton.dataset.name = name;
+            } else if (category === "ClickSounds") {
+                buyButton.classList.add("clicksounds-button");
+            } else if (category === "Cursor") {
+                buyButton.classList.add("cursor-button");
             }
 
+            // Add click event listener that handles all categories
             buyButton.addEventListener("click", () => {
-                if (category === "ClickSounds") {
-                    activateClickSound(name); 
-                } else if (category === "Cursor") {
+                const categoryName = category.toLowerCase();
+                if (categoryName === "clicksounds") {
+                    activateClickSound(name);
+                } else if (categoryName === "cursor") {
                     activateCursor(name);
-                } else if (category === "Music") {
+                } else if (categoryName === "music") {
                     playMusic(name);
                 }
             });
