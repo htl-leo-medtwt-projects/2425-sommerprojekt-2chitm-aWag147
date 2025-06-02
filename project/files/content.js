@@ -143,8 +143,6 @@ function addLabelToContainer() {
             <li>📸 Kamera: <span id="stats-camera">0</span></li>
             <li>👥 Team: <span id="stats-team">0</span></li>
             <li>📱 Phone: <span id="stats-phone">0</span></li>
-            <li>▶️ YouTube: <span id="stats-youtube">0</span></li>
-            <li>💬 Chat: <span id="stats-chat">0</span></li>
         </ul>
     `;
 

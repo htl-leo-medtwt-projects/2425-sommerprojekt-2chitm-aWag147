@@ -103,6 +103,15 @@ function showSnowEffect() {
     }, 2000);
 }
 
+function showUpgradeOverlay() {
+    const upgradeOverlay = document.querySelector('.upgrade-overlay');
+    if (upgradeOverlay._timeoutId) clearTimeout(upgradeOverlay._timeoutId);
+    upgradeOverlay.style.display = 'block';
+    upgradeOverlay._timeoutId = setTimeout(() => {
+        upgradeOverlay.style.display = 'none';
+    }, 2000);
+}
+
 // Klicker Logik
 function clickPhone() {
     enlarge(document.getElementById('phone'));

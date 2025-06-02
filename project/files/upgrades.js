@@ -66,6 +66,7 @@ function teamUpgrade() {
         updateUpgradeProfile();
         saveUpgradeState();
         highlightStatsBox();
+         showUpgradeOverlay();
 
         updateUI();
         saveGameState();
@@ -98,6 +99,7 @@ function cameraUpgrade() {
         updateUpgradeProfile();
         saveUpgradeState();
         highlightStatsBox();
+        showUpgradeOverlay();
 
         updateUI();
         saveGameState();
@@ -118,6 +120,7 @@ function phoneUpgrade() {
         updateUpgradeProfile();
         saveUpgradeState();
         highlightStatsBox();
+         showUpgradeOverlay();
 
         updateUI();
         saveGameState();
@@ -138,6 +141,7 @@ function youtubeUpgrade() {
         updateUpgradeProfile();
         saveUpgradeState();
         highlightStatsBox();
+         showUpgradeOverlay();
 
         updateUI();
         saveGameState();
@@ -158,6 +162,7 @@ function liveChat() {
         updateUpgradeProfile();
         saveUpgradeState();
         highlightStatsBox();
+         showUpgradeOverlay();
 
         updateUI();
         saveGameState();
